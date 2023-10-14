@@ -25,18 +25,20 @@ La Universidad del Valle de Guatemala ha realizado avances en la robótica de en
 
 ## Contenido
 
-In this Markdown representation:
+- `ACO_3pi` es la carpeta principal.
+  - `subcarpeta1` es una subcarpeta que contiene `file1.md` y un archivo `README.md`.
+  - `subcarpeta2` es otra subcarpeta que contiene `file2.md` y un archivo `README.md`.
+  
+- `MPSO_3pi` es la carpeta principal.
+  - `subcarpeta1` es una subcarpeta que contiene `file1.md` y un archivo `README.md`.
+  - `subcarpeta2` es otra subcarpeta que contiene `file2.md` y un archivo `README.md`.
 
-- `ACO_3pi` is the main folder.
-  - `subfolder1` is a subfolder containing `file1.md` and a `README.md` file.
-  - `subfolder2` is another subfolder containing `file2.md` and a `README.md` file.
-- `MPSO_3pi` is the main folder.
-  - `subfolder1` is a subfolder containing `file1.md` and a `README.md` file.
-  - `subfolder2` is another subfolder containing `file2.md` and a `README.md` file.
-- `Documentación` is the main folder.
-  - `subfolder1` is a subfolder containing `file1.md` and a `README.md` file.
-  - `subfolder2` is another subfolder containing `file2.md` and a `README.md` file.
-- The `README.md` at the bottom is the main README file for your repository.
+- `Documentación` es la carpeta principal.
+  - `subcarpeta1` es una subcarpeta que contiene `file1.md` y un archivo `README.md`.
+  - `subcarpeta2` es otra subcarpeta que contiene `file2.md` y un archivo `README.md`.
+
+- El archivo `README.md` en la parte inferior es el README principal de tu repositorio.
+
 
 You can copy and paste this Markdown code block into your `README.md` to display the folder structure, and adjust it to match your actual folder structure as needed.
 
