@@ -3,7 +3,7 @@
 
 load('analysis.mat')
 t = 32*linspace(0, length(v_hist)-1, length(v_hist));
-controlador = 5;
+controlador = 31;
 % Velocidad lineal de Robot ------------------------
 h2 = figure(1);
 ID = 1;
@@ -46,7 +46,7 @@ plot([0 t(end)],[-6.28 -6.28],'LineStyle','--','Color','k');
 xlim([0,t(end)]);
 grid on; grid minor;
 xlabel('Time (ms)','FontSize',16); ylabel('Velocity (rad/s)','FontSize',16);
-lgd = legend('Right E-Puck motor velocity','Left E-Puck motor velocity','Location','best');
+lgd = legend('Velocidad motor derecho','Velocidad motor izquierdo','Location','best');
 lgd.FontSize = 14;
 box(ax,'on');
 grid(ax,'on');

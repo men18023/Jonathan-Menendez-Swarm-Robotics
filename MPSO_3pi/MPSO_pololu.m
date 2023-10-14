@@ -74,7 +74,7 @@ robotat = robotat_connect();
 
 agents = cell(1,10);
 first_agent = 7;  % first number of 3pi available
-last_agent = 9;   % last number of 3pi available
+last_agent = 10;   % last number of 3pi available
 Q_Agents = last_agent-first_agent+1;
 for No_Agents = first_agent:last_agent
     agents{No_Agents} = robotat_3pi_connect(No_Agents);
@@ -169,15 +169,16 @@ pause(2)
 
 %% Loop
 while 1
-    number_iteration = number_iteration + 1
+    number_iteration = number_iteration + 1;
+    disp(number_iteration);
     %position_robot((1:Q_Agents),:) = robotat_get_pose(robotat,(1:Q_Agents),'eulaxyz')
     
     if state == false
-    position_robot((1:Q_Agents),:) = robotat_get_pose(robotat,(first_agent:last_agent),'eulzyx');
-    actual_position(1:Q_Agents,1) = position_robot(1:Q_Agents,1);   % Coordenada en eje Z de simulacion es coordenada X
-    actual_position(1:Q_Agents,2) = position_robot(1:Q_Agents,2);   % Coordenada en eje X de simulacion es coordenada Y
-    best_local(1:Q_Agents,:) = actual_position(1:Q_Agents,:);
-    best_global(1:Q_Agents,:) = actual_position(1:Q_Agents,:);
+    position_robot = robotat_get_pose(robotat,(first_agent:last_agent),'eulzyx');
+    actual_position = position_robot(:,1:2);   % Coordenada en eje Z de simulacion es coordenada X
+    %actual_position(:,2) = position_robot(:,2);   % Coordenada en eje X de simulacion es coordenada Y
+    best_local = actual_position;
+    best_global = actual_position;
    
     % Calcular Fitness Value
     for i = 1:Q_Agents
@@ -500,30 +501,3 @@ end
 %     strin = "hello";
 % end
 %% Functions
-function num = printRandoms(lower, upper, count)
-  for i = 1:count
-    num = rand(1, 1) * (upper - lower + 1) + lower;
-    disp(num)
-  end
-end
-
-function num = randfrac()
-  num = rand(1, 1);
-  %return num;
-end
-
-function [fitness] = fitness(x, y, BENCHMARK_TYPE)
-  if BENCHMARK_TYPE == 0
-    fitness = x^2 + y^2;
-  elseif BENCHMARK_TYPE == 1
-    fitness = (1 - x)^2 + 100 * (y - x^2)^2;
-  elseif BENCHMARK_TYPE == 2
-    fitness = (x + 2*y - 7)^2 + (2*x + y - 5)^2;
-  elseif BENCHMARK_TYPE == 3
-    fitness = (x^2 + y - 11)^2 + (x + y^2 - 7)^2;
-  elseif BENCHMARK_TYPE == 4
-    fitness = 0.5 + (cos(sin(sqrt(x^2 - y^2))))^2 - 0.5 / (1 + 0.001*(x^2 + y^2))^2;
-  elseif BENCHMARK_TYPE == 5
-    fitness = -(sin(2*x - y)^2 * sin(2*x + y)^2) / sqrt(x^2 + y^2);
-  end
-end

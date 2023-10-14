@@ -1,4 +1,4 @@
-% MATLAB controller for Webots
+    % MATLAB controller for Webots
 % File:          e-puck_MPSO_m.m
 % Date:          06/20/2023
 % Description:   e-puck_MPSO migration to matlab
@@ -22,7 +22,7 @@ l = 0.048;
 %radio=32/2000;
 % Robotat Paramenters
 robotat = robotat_connect();
-robot7 = robotat_3pi_connect(7);
+robot7 = robotat_3pi_connect(4);
 %robot8 = robotat_3pi_connect(8);
 %robot9 = robotat_3pi_connect(9);
 % Define the goal position
@@ -60,7 +60,7 @@ kdO = 0;
 eO_D = 0;
 eO_1 = 0;
 EO = 0;
-pos_origin = robotat_get_pose(robotat,7,'eulxyz');
+pos_origin = robotat_get_pose(robotat,4,'eulxyz');
 goal = [0,0];
 interpolate_step = 0.005;
 x_tray7 = [pos_origin(1); webots_path(:, 1)]; 
@@ -70,9 +70,10 @@ ytray7 = interp1q(x_tray7, y_tray7, xtray7);
 tray7 = [xtray7,ytray7];
 % Ciclo decontrol
 k=1;
+%%
 while(k<length(tray7))
-    xi = robotat_get_pose(robotat,7,'XYZ');
-    x = xi(1); y = xi(2);  theta = (xi(6)-90)*pi/180;
+    xi = robotat_get_pose(robotat,4,'XYZ');
+    x = xi(1); y = xi(2);  theta = (xi(6)-160)*pi/180;
     
     xg = tray7(k,1);
     yg = tray7(k,2);

@@ -3,11 +3,11 @@
 % parámetros:
 % gridx y gridy son números enteros mayores a 1. Se genera un grafo de gridx x gridy
 % La salida es el grafo para implementar el ACO.
-function [grafo] = graph_grid(gridx, gridy)
+function [grafo] = graph_grid(grid_s)
 
 diag_cost = 0.5;
-x_lim_pos = gridx;
-y_lim_pos = gridy;
+x_lim_pos = grid_s;
+y_lim_pos = grid_s;
 x_lim_neg = 1;
 y_lim_neg = 1;
 

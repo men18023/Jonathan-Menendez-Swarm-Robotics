@@ -20,9 +20,9 @@ l = 0.048;
 %ell=96/2000;
 %radio=32/2000;
 % Robotat Paramenters
-robotat = robotat_connect();
-robot7 = robotat_3pi_connect(7);
-robot8 = robotat_3pi_connect(8);
+%robotat = robotat_connect();
+%robot7 = robotat_3pi_connect(7);
+%robot8 = robotat_3pi_connect(8);
 %robot9 = robotat_3pi_connect(9);
 % Define the goal position
 goal_x = 0;
@@ -68,11 +68,18 @@ tray_y7 = linspace(pos_origin7(2), goal(2), 100);
 tray7 = [tray_x7',tray_y7'];
 % Ciclo decontrol
 k=1;
+bearing = bearing_deg;
+for adj = 1:length(bearing)
+    if bearing(adj) < 0
+        bearing(adj) =  bearing(adj) + 360;
+    end
+end
+%%
 while(k<length(tray7))
     xi8 = robotat_get_pose(robotat,8,'XYZ');
     xi7 = robotat_get_pose(robotat,7,'XYZ');
-    x8 = xi8(1); y8 = xi8(2);  theta8 = (xi8(6)-198)*pi/180;
-    x7 = xi7(1); y7 = xi7(2);  theta7 = (xi7(6)-90)*pi/180;
+    x8 = xi8(1); y8 = xi8(2);  theta8 = (xi8(6)-bearing(8))*pi/180;
+    x7 = xi7(1); y7 = xi7(2);  theta7 = (xi7(6)-bearing(7))*pi/180;
     xg8 = tray8(k,1);
     yg8 = tray8(k,2);
     xg7 = tray7(k,1);
@@ -135,7 +142,7 @@ while(k<length(tray7))
     if phi_R7 < -50
         phi_R7 = -50;
     end
-    robotat_3pi_set_wheel_velocities(robot8,phi_L8,phi_R8);
+    %robotat_3pi_set_wheel_velocities(robot8,phi_L8,phi_R8);
     robotat_3pi_set_wheel_velocities(robot7,phi_L7,phi_R7);
     k=k+1
 end

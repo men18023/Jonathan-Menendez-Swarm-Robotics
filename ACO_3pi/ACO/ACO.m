@@ -11,23 +11,25 @@
 % Para que funcione hay que descomentarlo y descomentar el profile viewer
 % de abajo (casi al final del código)
 tic  % Para medir el tiempo que se tarda el algoritmo en correr.
-prueba = 5;
+prueba = 10071;
 %% Graph generation
 % Se elige el tipo de grafo que se va a utilizar
 graph_type = "grid";
 
 if strcmp(graph_type, "grid")
     % Creamos grid cuadrado con la cantidad de nodos indicada:
-    grid_sizex = 10;
-    grid_sizey = 10;
+    grid_size = 10;
+    %grid_sizey = 10;
     cost_diag = 0.5;
     tau_0 = 0.1;  % Valor de tau inicial
-    G = graph_grid(grid_sizex,grid_sizey);
-    nodo_dest = "56";
+    G = graph_grid(grid_size);
+    nodo_dest = "70";
     nodo_init = "1";
     plot_obstacles = 0;
-    bound_perx = 0.75;
-    bound_pery = 0.8;
+    bound_x = 0.75;
+    bound_y = 0.8;
+    ratio_x = 1/(grid_size/4);
+    ratio_y = 1/(grid_size/5);
 elseif strcmp(graph_type, "visibility")
     % Para cambiar de grafo hay que crear uno con la app
     load('vis_graph.mat')
@@ -59,18 +61,18 @@ elseif strcmp(graph_type, "rrt")
 end
 
 %% ACO init
-t_max = 150; 
+t_max = 250; 
 hormigas = 100;
 
 % Rate de evaporación (puede tomar valores entre 0 y 1)
-rho = 0.9; 
+rho = 0.6; 
 % Le da más peso a la feromona en la probabilidad
 %alpha = 1.1;
-alpha = 1.5;
+alpha = 1.1;
 % Le da más peso al costo del link en la probabilidad
-beta = 1;
+beta = 0.8;
 % cte. positiva que regula el depósito de feromona
-Q = 2.1; 
+Q = 1.5; 
 % Porcentaje de hormigas que queremos siguiendo la misma solución
 epsilon = 0.9; 
 
@@ -215,15 +217,16 @@ end
 tiempofinal = toc;
 formatSpec = 'iter: %d - t: %.2f - cost: %.2f \n';
 fprintf(formatSpec, t-1, tiempofinal, moda)
-bpath = [G.Nodes.X(best_path), 10-G.Nodes.Y(best_path)];
+bpath = [G.Nodes.X(best_path), G.Nodes.Y(best_path)];
 if graph_type == "grid"
     % webots_path = (bpath - grid_sizex/2).*[(bound_per*2/5) (bound_per*-1/2)];
-    webots_path = (bpath - grid_sizex/2).*[(bound_perx*2/5) (bound_pery*-1/2)];
+    webots_path = (bpath - grid_size/2).*[(bound_x*ratio_x) (bound_y*ratio_y)];
 else
     %webots_path = bpath.*[1/grid_sizex -1/grid_sizex];
 end
 wb_pc_path = 'C:\Users\jonam\OneDrive - Universidad del Valle de Guatemala\Escritorio\Tesis_2023\ACO_Gabriela\ACO_3pi\';
 save(strcat(wb_pc_path, 'webots_test.mat'), 'bpath', 'webots_path', 'graph_type')
-saveas(fig2, ['c',num2str(prueba),'_traj.png']);
-saveas(fig1, ['c',num2str(prueba),'_cost.png']);
-save('ACO_prueba13.mat')
+filename = sprintf('prueba_%d.mat', prueba);
+saveas(fig2, [filename,'_traj.png']);
+saveas(fig1, [filename,'_cost.png']);
+save(filename);
