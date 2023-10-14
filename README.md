@@ -23,6 +23,23 @@ Este proyecto se centra en la validación de algoritmos de robótica de enjambre
 
 La Universidad del Valle de Guatemala ha realizado avances en la robótica de enjambre, donde se ha dado un enfoque a los algoritmos como lo son Particle Swarm Optimization y Ant Colony Optimization para la generación de trayectorias en plataformas móviles. En un nuevo estudio, se realizaron pruebas físicas de estos algoritmos con robots [Pololu 3pi+](https://www.pololu.com/product/4975). Se realizó la optimización de parámetros en los algoritmos y los controladores para mejorar el rendimiento en físico. También se realizaron pruebas para evaluar la robustez y adaptabilidad de cada algoritmo.
 
+## Contenido
+
+In this Markdown representation:
+
+- `ACO_3pi` is the main folder.
+  - `subfolder1` is a subfolder containing `file1.md` and a `README.md` file.
+  - `subfolder2` is another subfolder containing `file2.md` and a `README.md` file.
+- `MPSO_3pi` is the main folder.
+  - `subfolder1` is a subfolder containing `file1.md` and a `README.md` file.
+  - `subfolder2` is another subfolder containing `file2.md` and a `README.md` file.
+- `Documentación` is the main folder.
+  - `subfolder1` is a subfolder containing `file1.md` and a `README.md` file.
+  - `subfolder2` is another subfolder containing `file2.md` and a `README.md` file.
+- The `README.md` at the bottom is the main README file for your repository.
+
+You can copy and paste this Markdown code block into your `README.md` to display the folder structure, and adjust it to match your actual folder structure as needed.
+
 ## Instalación
 
 [Explica cómo instalar o configurar el proyecto aquí.]
