@@ -2,11 +2,12 @@
 
 Este repositorio contiene documentación relacionada con el proyecto de graduación:
 
-**Título del Proyecto:** Validación de los algoritmos de robótica de enjambre Particle Swarm Optimization y Ant Colony Optimization con sistemas robóticos físicos en el ecosistema Robotat
+**Validación de los algoritmos de robótica de enjambre Particle Swarm Optimization y Ant Colony Optimization con sistemas robóticos físicos en el ecosistema Robotat**
 
 ## Descripción
 
-Este proyecto se centra en la validación de algoritmos de robótica de enjambre, específicamente Particle Swarm Optimization y Ant Colony Optimization, utilizando sistemas robóticos físicos dentro del ecosistema Robotat.
+Este proyecto se centra en la validación de algoritmos de robótica de enjambre, específicamente Particle Swarm Optimization y Ant Colony Optimization, utilizando el sistema de captura de movimiento OptiTrack disponible para la mesa de pruebas del Robotat en la Universidad del Valle de Guatemala
+
 
 ## Contenidos
 
