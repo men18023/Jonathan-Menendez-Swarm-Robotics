@@ -1,43 +1,41 @@
-# Jonathan Menendez Swarm Robotics 
- Repositorio para documentación relacionada al proyecto de graduación:  Validación de los algoritmos de robótica de enjambre Particle Swarm Optimization y Ant Colony Optimization con sistemas robóticos físicos en el ecosistema Robotat
+# Proyecto de Robótica de Enjambre de Jonathan Menéndez
 
- # Jonathan Menendez Swarm Robotics
+Este repositorio contiene documentación relacionada con el proyecto de graduación:
 
-This repository contains documentation related to the graduation project:
+**Título del Proyecto:** Validación de los algoritmos de robótica de enjambre Particle Swarm Optimization y Ant Colony Optimization con sistemas robóticos físicos en el ecosistema Robotat
 
-**Project Title:** Validación de los algoritmos de robótica de enjambre Particle Swarm Optimization y Ant Colony Optimization con sistemas robóticos físicos en el ecosistema Robotat
+## Descripción
 
-## Description
+Este proyecto se centra en la validación de algoritmos de robótica de enjambre, específicamente Particle Swarm Optimization y Ant Colony Optimization, utilizando sistemas robóticos físicos dentro del ecosistema Robotat.
 
-This project focuses on the validation of swarm robotics algorithms, specifically Particle Swarm Optimization and Ant Colony Optimization, using physical robotic systems within the Robotat ecosystem.
+## Contenidos
 
-## Contents
+- [Introducción](#introducción)
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Contribuciones](#contribuciones)
+- [Licencia](#licencia)
 
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+## Introducción
 
-## Introduction
+[Proporciona una introducción al proyecto aquí.]
 
-[Provide an introduction to the project here.]
+## Instalación
 
-## Installation
+[Explica cómo instalar o configurar el proyecto aquí.]
 
-[Explain how to install or set up the project here.]
+## Uso
 
-## Usage
+[Describe cómo utilizar el proyecto o incluye ejemplos aquí.]
 
-[Describe how to use the project or include examples here.]
+## Contribuciones
 
-## Contributing
+[Información sobre cómo otros pueden contribuir al proyecto.]
 
-[Information on how others can contribute to the project.]
+## Licencia
 
-## License
+[Especifica la información de la licencia del proyecto.]
 
-[Specify the project's license information.]
+Siéntete libre de explorar la documentación y contribuir al proyecto según sea necesario.
 
-Feel free to explore the documentation and contribute to the project as needed.
 
