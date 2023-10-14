@@ -20,7 +20,7 @@ Este proyecto se centra en la validación de algoritmos de robótica de enjambre
 
 ## Introducción
 
-La Universidad del Valle de Guatemala ha realizado avances en la robótica de enjambre, donde se ha dado un enfoque a los algoritmos como lo son Particle Swarm Optimization y Ant Colony Optimization para la generación de trayectorias en plataformas móviles. En un nuevo estudio, se realizaron pruebas físicas de estos algoritmos con robots [Pololu 3pi+](https://www.pololu.com/product/4975). Se optimizaron las condiciones de los algoritmos y los controladores para mejorar el rendimiento en físico. También se realizaron pruebas para evaluar la robustez y adaptabilidad de los algoritmos.
+La Universidad del Valle de Guatemala ha realizado avances en la robótica de enjambre, donde se ha dado un enfoque a los algoritmos como lo son Particle Swarm Optimization y Ant Colony Optimization para la generación de trayectorias en plataformas móviles. En un nuevo estudio, se realizaron pruebas físicas de estos algoritmos con robots [Pololu 3pi+](https://www.pololu.com/product/4975). Se realizó la optimización de parámetros en los algoritmos y los controladores para mejorar el rendimiento en físico. También se realizaron pruebas para evaluar la robustez y adaptabilidad de cada algoritmo.
 
 ## Instalación
 
