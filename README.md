@@ -9,7 +9,7 @@ Este repositorio contiene documentación relacionada con el proyecto de graduaci
 Este proyecto se centra en la validación de algoritmos de robótica de enjambre, específicamente Particle Swarm Optimization y Ant Colony Optimization, utilizando el sistema de captura de movimiento OptiTrack disponible para la mesa de pruebas del Robotat en la Universidad del Valle de Guatemala
 
 <div align="center">
-<img src="https://github.com/men18023/Jonathan-Menendez-Swarm-Robotics/assets/68084833/23086462-9e63-44c2-a754-8b01cff8eab6" alt="Mesa de pruebas Robotat" width="500">
+<img src="https://github.com/men18023/Jonathan-Menendez-Swarm-Robotics/assets/68084833/be87a6c0-01f1-47dc-935d-0feb88acacbd" alt="Mesa de pruebas Robotat" width="500">
 </div>
 ## Contenidos
 
