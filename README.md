@@ -13,9 +13,10 @@ Este proyecto se centra en la validación de algoritmos de robótica de enjambre
 ## Contenidos
 
 - [Introducción](#introducción)
+- [Contenido](#contenido)
 - [Instalación](#instalación)
 - [Uso](#uso)
-- [Resultados](#Resultados)
+- [Resultados](#resultados)
 
 
 ## Introducción
