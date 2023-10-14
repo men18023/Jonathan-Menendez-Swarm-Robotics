@@ -1,4 +1,4 @@
-# Proyecto de Robótica de Enjambre de Jonathan Menéndez
+# Algoritmos de Robótica de Enjambre
 
 Este repositorio contiene documentación relacionada con el proyecto de graduación:
 
