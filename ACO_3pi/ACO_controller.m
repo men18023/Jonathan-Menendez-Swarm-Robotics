@@ -11,7 +11,7 @@
 %keyboard;
 load('webots_test.mat');
 load('Orientaciones.mat','bearing_deg');
-controlador = 4;
+controlador = 10191;  %MMDDNN mes/día/número de prueba 
 % get and enable devices, e.g.:
 %  camera = wb_robot_get_device('camera');
 %  wb_camera_enable(camera, TIME_STEP);

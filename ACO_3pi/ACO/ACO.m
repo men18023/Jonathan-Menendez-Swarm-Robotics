@@ -11,7 +11,7 @@
 % Para que funcione hay que descomentarlo y descomentar el profile viewer
 % de abajo (casi al final del código)
 tic  % Para medir el tiempo que se tarda el algoritmo en correr.
-prueba = 10071;
+prueba = 101902;
 %% Graph generation
 % Se elige el tipo de grafo que se va a utilizar
 graph_type = "grid";
@@ -23,7 +23,7 @@ if strcmp(graph_type, "grid")
     cost_diag = 0.5;
     tau_0 = 0.1;  % Valor de tau inicial
     G = graph_grid(grid_size);
-    nodo_dest = "70";
+    nodo_dest = "56";
     nodo_init = "1";
     plot_obstacles = 0;
     bound_x = 0.75;
@@ -224,9 +224,11 @@ if graph_type == "grid"
 else
     %webots_path = bpath.*[1/grid_sizex -1/grid_sizex];
 end
-wb_pc_path = 'C:\Users\jonam\OneDrive - Universidad del Valle de Guatemala\Escritorio\Tesis_2023\ACO_Gabriela\ACO_3pi\';
+wb_pc_path = 'C:\Users\jonam\OneDrive - Universidad del Valle de Guatemala\Escritorio\Tesis_2023\Repository\Jonathan-Menendez-Swarm-Robotics-\ACO_3pi\';
 save(strcat(wb_pc_path, 'webots_test.mat'), 'bpath', 'webots_path', 'graph_type')
-filename = sprintf('prueba_%d.mat', prueba);
-saveas(fig2, [filename,'_traj.png']);
-saveas(fig1, [filename,'_cost.png']);
-save(filename);
+filename = sprintf('prueba_%d', prueba);
+%saveas(fig2, [filename,'_traj.png']);
+saveas(fig2, [filename,'_pos.eps'],'epsc');
+saveas(fig1, [filename,'_cost.eps'],'epsc');
+%saveas(fig1, [filename,'_cost.png']);
+save([filename,'.mat']);

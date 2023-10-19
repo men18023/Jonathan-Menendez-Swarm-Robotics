@@ -22,7 +22,7 @@ l = 0.048;
 %radio=32/2000;
 % Robotat Paramenters
 robotat = robotat_connect();
-robot7 = robotat_3pi_connect(4);
+robot7 = robotat_3pi_connect(7);
 %robot8 = robotat_3pi_connect(8);
 %robot9 = robotat_3pi_connect(9);
 % Define the goal position
@@ -60,7 +60,7 @@ kdO = 0;
 eO_D = 0;
 eO_1 = 0;
 EO = 0;
-pos_origin = robotat_get_pose(robotat,4,'eulxyz');
+pos_origin = robotat_get_pose(robotat,7,'eulxyz');
 goal = [0,0];
 interpolate_step = 0.005;
 x_tray7 = [pos_origin(1); webots_path(:, 1)]; 
@@ -72,8 +72,8 @@ tray7 = [xtray7,ytray7];
 k=1;
 %%
 while(k<length(tray7))
-    xi = robotat_get_pose(robotat,4,'XYZ');
-    x = xi(1); y = xi(2);  theta = (xi(6)-160)*pi/180;
+    xi = robotat_get_pose(robotat,7,'XYZ');
+    x = xi(1); y = xi(2);  theta = (xi(6)-90)*pi/180;
     
     xg = tray7(k,1);
     yg = tray7(k,2);
@@ -101,17 +101,17 @@ while(k<length(tray7))
     phi_L = (v-w*ell)/radio;
     phi_L = convangvel(phi_L, 'rad/s', 'rpm');
     phi_R = convangvel(phi_R, 'rad/s', 'rpm');
-    if phi_L > 75
-        phi_L = 75;
+    if phi_L > 50
+        phi_L = 50;
     end
-    if phi_L < -75
-        phi_L = -75;
+    if phi_L < -50
+        phi_L = -50;
     end
-    if phi_R > 75
-        phi_R = 75;
+    if phi_R > 50
+        phi_R = 50;
     end
-    if phi_R < -75
-        phi_R = -75;
+    if phi_R < -50
+        phi_R = -50;
     end
     robotat_3pi_set_wheel_velocities(robot7,phi_L,phi_R);
     trajectory = [trajectory; [xi(1), xi(2)]];

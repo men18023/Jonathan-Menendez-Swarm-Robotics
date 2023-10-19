@@ -42,17 +42,17 @@ phi_L = (v-w*ell)/radio;
 phi_L = convangvel(phi_L, 'rad/s', 'rpm');
 phi_R = convangvel(phi_R, 'rad/s', 'rpm');
 
-if phi_L > 50
-    phi_L = 50;
+if phi_L > 75
+    phi_L = 75;
 end
-if phi_L < -50
-    phi_L = -50;
+if phi_L < -75
+    phi_L = -75;
 end
-if phi_R > 50
-    phi_R = 50;
+if phi_R > 75
+    phi_R = 75;
 end
-if phi_R < -50
-    phi_R = -50;
+if phi_R < -75
+    phi_R = -75;
 end
 
 phi = [phi_L,phi_R];

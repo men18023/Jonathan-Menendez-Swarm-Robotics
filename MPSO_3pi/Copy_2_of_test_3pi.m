@@ -61,7 +61,7 @@ end
 %% Movimiento controlado
 
 goal_1 = robotat_get_pose(robotat,1,ang_seq);
-goal = goal_1(1:2);
+goal = [1,1];
 for gen = first_agent:last_agent
     numb = gen-first_agent+1;
     %eval(['pos_origin' num2str(gen) '=robotat_get_pose(robotat,con,ang_seq);']);
@@ -89,7 +89,7 @@ while(k<length(tray{1}))
            %display(phi)
            %eval(['phi_L{' num2str(numb) '}' '=[phi_L{' num2str(numb) '}; phi(1)']);
            %eval(['phi_R{' num2str(numb) '}' '=[phi_R{' num2str(numb) '}; phi(2)']);
-           eval(['trajectory{' num2str(numb) '}' '=[trajectory{' num2str(numb) '}; xi, yi];']);
+           %eval(['trajectory{' num2str(numb) '}' '=[trajectory{' num2str(numb) '}; xi, yi];']);
            %eval(['u_vw{' num2str(numb) '}' '=[trajectory{' num2str(numb) '}; u];']);
            %trajectory = [trajectory; [xi(1), xi(2)]];
     end
