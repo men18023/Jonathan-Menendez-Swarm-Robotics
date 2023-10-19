@@ -46,6 +46,9 @@ You can copy and paste this Markdown code block into your `README.md` to display
 
 ## Instalación
 
+ACO
+
+PSO
 [Explica cómo instalar o configurar el proyecto aquí.]
 
 ## Uso
