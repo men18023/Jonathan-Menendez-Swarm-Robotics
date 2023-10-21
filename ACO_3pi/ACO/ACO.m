@@ -11,7 +11,7 @@
 % Para que funcione hay que descomentarlo y descomentar el profile viewer
 % de abajo (casi al final del código)
 tic  % Para medir el tiempo que se tarda el algoritmo en correr.
-prueba = 101902;
+prueba = 102002;
 %% Graph generation
 % Se elige el tipo de grafo que se va a utilizar
 graph_type = "grid";
@@ -23,10 +23,10 @@ if strcmp(graph_type, "grid")
     cost_diag = 0.5;
     tau_0 = 0.1;  % Valor de tau inicial
     G = graph_grid(grid_size);
-    nodo_dest = "56";
-    nodo_init = "1";
+    nodo_dest = "67";
+    nodo_init = "3";
     plot_obstacles = 0;
-    bound_x = 0.75;
+    bound_x = 0.95;
     bound_y = 0.8;
     ratio_x = 1/(grid_size/4);
     ratio_y = 1/(grid_size/5);

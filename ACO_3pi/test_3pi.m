@@ -54,8 +54,8 @@ v0 = MAX_SPEED/8;
 alpha = 0.9;
 
 % PID Orientación
-kpO = 1;
-kiO = 0.001;
+kpO = 2;
+kiO = 0.005;
 kdO = 0;
 eO_D = 0;
 eO_1 = 0;

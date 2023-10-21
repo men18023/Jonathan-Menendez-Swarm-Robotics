@@ -1,7 +1,8 @@
-function [num,count]  = printRandoms(lower, upper, count)
+function [num,count,lower,upper]  = printRandoms(lower, upper, count)
   for i = 1:count
     num = rand(1, 1) * (upper - lower + 1) + lower;
-    disp(num)
+    num = [num num];
+    %disp(num)
   end
 end
 % function nums = printRandoms(lower, upper, count)

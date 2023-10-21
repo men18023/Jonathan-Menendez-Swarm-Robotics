@@ -61,7 +61,7 @@ end
 %% Movimiento controlado
 
 goal_1 = robotat_get_pose(robotat,1,ang_seq);
-goal = [1,1];
+goal = [1,-1];
 for gen = first_agent:last_agent
     numb = gen-first_agent+1;
     %eval(['pos_origin' num2str(gen) '=robotat_get_pose(robotat,con,ang_seq);']);
@@ -83,15 +83,21 @@ while(k<length(tray{1}))
     %tStart = tic; 
     disp(k)
     for agent_vel = first_agent:last_agent
-           numb = agent_vel-first_agent+1;
-           [phi,xi,yi,u] = PID_controller1(robotat,agent_vel,bearing_new(agent_vel),tray{numb},k);
-           eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(agent_vel) ',phi(1),phi(2))']);
-           %display(phi)
-           %eval(['phi_L{' num2str(numb) '}' '=[phi_L{' num2str(numb) '}; phi(1)']);
-           %eval(['phi_R{' num2str(numb) '}' '=[phi_R{' num2str(numb) '}; phi(2)']);
-           %eval(['trajectory{' num2str(numb) '}' '=[trajectory{' num2str(numb) '}; xi, yi];']);
-           %eval(['u_vw{' num2str(numb) '}' '=[trajectory{' num2str(numb) '}; u];']);
-           %trajectory = [trajectory; [xi(1), xi(2)]];
+        spmd
+            % Generate a single random number for each worker
+            [phi,xi,yi,u] = PID_controller1(robotat,agent_vel,bearing_new(agent_vel),tray{numb},k);
+            num(labindex) = randomNumber;
+            combinedResult = gcat(num(labindex), 1, 1);
+        end
+        numb = agent_vel-first_agent+1;
+        [phi,xi,yi,u] = PID_controller1(robotat,agent_vel,bearing_new(agent_vel),tray{numb},k);
+        eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(agent_vel) ',phi(1),phi(2))']);
+        %display(phi)
+        %eval(['phi_L{' num2str(numb) '}' '=[phi_L{' num2str(numb) '}; phi(1)']);
+        %eval(['phi_R{' num2str(numb) '}' '=[phi_R{' num2str(numb) '}; phi(2)']);
+        %eval(['trajectory{' num2str(numb) '}' '=[trajectory{' num2str(numb) '}; xi, yi];']);
+        %eval(['u_vw{' num2str(numb) '}' '=[trajectory{' num2str(numb) '}; u];']);
+        %trajectory = [trajectory; [xi(1), xi(2)]];
     end
 %     trajectory1 = [trajectory1; [xi(1), xi(2)]];
 %     v_hist = [v_hist; v];
@@ -102,6 +108,10 @@ while(k<length(tray{1}))
 %     save('analysis.mat', 'trajectory', 'v_hist', 'w_hist', 'rwheel_hist', 'lwheel_hist', 'goal','-append')
     k=k+1;
 end
+
+parfor ctrl = k:length(tray{1})
+    
+end    
 %%
 %tEnd = toc(tStart);      % pair 2: toc
 pause(1);
