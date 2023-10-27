@@ -11,7 +11,7 @@ clear;
 close all;
 clc;
 % Load bearing angles for markers 1-15
-load('Orientaciones.mat','bearing_deg');
+load('Orientaciones.mat','bearing_deg','bearing_new');
 load('webots_test.mat');
 % Adjust 3pi physical parameters
 %MAX_WHEEL_VELOCITY = 800;
@@ -54,8 +54,8 @@ v0 = MAX_SPEED/8;
 alpha = 0.9;
 
 % PID Orientación
-kpO = 2;
-kiO = 0.005;
+kpO = 1;
+kiO = 0.001;
 kdO = 0;
 eO_D = 0;
 eO_1 = 0;
@@ -65,8 +65,25 @@ goal = [0,0];
 interpolate_step = 0.005;
 x_tray7 = [pos_origin(1); webots_path(:, 1)]; 
 y_tray7 = [pos_origin(2); webots_path(:, 2)];
-xtray7 = (x_tray7(1):interpolate_step:x_tray7(end))';
-ytray7 = interp1q(x_tray7, y_tray7, xtray7);
+%xtray7 = (x_tray7(1):interpolate_step:x_tray7(end))';
+if x_tray7(1) < x_tray7(end)
+    xtray7 = (x_tray7(1):interpolate_step:x_tray7(end))';
+    ytray7 = interp1q(x_tray7, y_tray7, xtray7);
+else
+    [unique_x_tray7, idx] = unique(x_tray7, 'stable');  % Remove duplicates and keep the original order
+    % Apply a modification to duplicates (e.g., add 0.1)
+    duplicate_indices = setdiff(1:length(x_tray7), idx);
+    x_tray7(duplicate_indices) = x_tray7(duplicate_indices) - 0.01;
+    y_tray7 = y_tray7(idx);  % Match y values to unique x values
+
+    xtray7 = (x_tray7(1):-interpolate_step:x_tray7(end))';
+    x_tray7 = flipud(x_tray7);
+    y_tray7 = flipud(y_tray7);
+    ytray7 = interp1(x_tray7, y_tray7, xtray7, 'linear', 'extrap'); % Ensure it extends to the last value
+end
+
+
+%ytray7 = interp1q(x_tray7, y_tray7, xtray7);
 tray7 = [xtray7,ytray7];
 % Ciclo decontrol
 k=1;
@@ -97,8 +114,10 @@ while(k<length(tray7))
     % Se combinan los controladores
     u = [v; w];
     %u_hist = [u_hist, u];
-    phi_R = (v+w*ell)/radio;
-    phi_L = (v-w*ell)/radio;
+    
+    phi_L = (v-w*ell)/r;
+    phi_R = (v+w*ell)/r;
+
     phi_L = convangvel(phi_L, 'rad/s', 'rpm');
     phi_R = convangvel(phi_R, 'rad/s', 'rpm');
     if phi_L > 50
@@ -113,6 +132,7 @@ while(k<length(tray7))
     if phi_R < -50
         phi_R = -50;
     end
+    
     robotat_3pi_set_wheel_velocities(robot7,phi_L,phi_R);
     trajectory = [trajectory; [xi(1), xi(2)]];
     v_hist = [v_hist; v];
@@ -126,3 +146,4 @@ end
 pause(2);
 robotat_3pi_force_stop(robot7);
 robotat_3pi_disconnect(robot7);
+%robotat_disconnect(robotat);

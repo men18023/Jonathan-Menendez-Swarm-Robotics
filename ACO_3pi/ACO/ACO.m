@@ -11,7 +11,7 @@
 % Para que funcione hay que descomentarlo y descomentar el profile viewer
 % de abajo (casi al final del código)
 tic  % Para medir el tiempo que se tarda el algoritmo en correr.
-prueba = 102002;
+prueba = "1027";  %mes/día
 %% Graph generation
 % Se elige el tipo de grafo que se va a utilizar
 graph_type = "grid";
@@ -23,11 +23,11 @@ if strcmp(graph_type, "grid")
     cost_diag = 0.5;
     tau_0 = 0.1;  % Valor de tau inicial
     G = graph_grid(grid_size);
-    nodo_dest = "67";
-    nodo_init = "3";
+    nodo_dest = "90";
+    nodo_init = "1";
     plot_obstacles = 0;
-    bound_x = 0.95;
-    bound_y = 0.8;
+    bound_x = 0.65;
+    bound_y = 0.75;
     ratio_x = 1/(grid_size/4);
     ratio_y = 1/(grid_size/5);
 elseif strcmp(graph_type, "visibility")
@@ -61,11 +61,11 @@ elseif strcmp(graph_type, "rrt")
 end
 
 %% ACO init
-t_max = 250; 
-hormigas = 100;
+t_max = 70; 
+hormigas = 50;
 
 % Rate de evaporación (puede tomar valores entre 0 y 1)
-rho = 0.6; 
+rho = 0.9; 
 % Le da más peso a la feromona en la probabilidad
 %alpha = 1.1;
 alpha = 1.1;
@@ -226,9 +226,12 @@ else
 end
 wb_pc_path = 'C:\Users\jonam\OneDrive - Universidad del Valle de Guatemala\Escritorio\Tesis_2023\Repository\Jonathan-Menendez-Swarm-Robotics-\ACO_3pi\';
 save(strcat(wb_pc_path, 'webots_test.mat'), 'bpath', 'webots_path', 'graph_type')
-filename = sprintf('prueba_%d', prueba);
+filename = strcat(prueba,"_",nodo_init,"_",nodo_dest);
 %saveas(fig2, [filename,'_traj.png']);
-saveas(fig2, [filename,'_pos.eps'],'epsc');
-saveas(fig1, [filename,'_cost.eps'],'epsc');
+hgexport(fig2,strcat(filename,'_pos.eps'));
+hgexport(fig1,strcat(filename,'_cost.eps'));
+%print('-depsc2', '-loose', 'test2.eps');
+%saveas(fig2, [filename,'_pos.eps'],'epsc');
+%saveas(fig1, [filename,'_cost.eps'],'epsc');
 %saveas(fig1, [filename,'_cost.png']);
-save([filename,'.mat']);
+save(strcat(filename,'.mat'));
