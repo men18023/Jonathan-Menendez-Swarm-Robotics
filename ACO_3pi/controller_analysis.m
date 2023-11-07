@@ -3,7 +3,7 @@
 
 load('analysis.mat')
 t = 32*linspace(0, length(v_hist)-1, length(v_hist));
-controlador = 31;
+controlador = 1104;
 % Velocidad lineal de Robot ------------------------
 h2 = figure(1);
 ID = 1;
@@ -19,7 +19,7 @@ lgd.FontSize = 14;
 
 %% Velocidad angular de Robot ------------------
 h3 = figure(2);
-str = 'Velocidad lineal';
+str = 'Velocidad angular';
 set(h3, 'units', 'points', 'position', [60,95,620,420], 'name', str);
 set(h3, 'color', 'w');
 plot(t, w_hist, 'LineWidth', 2, 'Color', [.9 .8 .1]);
@@ -31,7 +31,7 @@ lgd.FontSize = 14;
 
 %% Velocidades angulares de Robot -------------
 h4 = figure(3);
-str = 'Velocidad lineal';
+str = 'Velocidad de motores';
 set(h4,'units','points','position',[60,95,620,420],'name',str);
 set(h4,'color','w');
 ax = axes('Parent',h4,'Position',[0.0623716632443532 0.105031948881789 0.907765757474463 0.870952303086714]);
@@ -55,9 +55,9 @@ set(ax,'XMinorGrid','on','YMinorGrid','on','ZMinorGrid','on');
 
 %% Trayectoria con PSO -----------------
 h5 = figure(4);
-str = 'Velocidad lineal';
+str = 'Trayectoria generada';
 set(h5,'units','points','position',[60,95,520,420],'name',str);
-plot(trajectory(:, 1), trajectory(:, 2), 'LineWidth', 2, 'Color', [.2 .5 .7]);
+plot(trajectory(1:end,1), trajectory(1:end,2), 'LineWidth', 2, 'Color', [.2 .5 .7]);
 view(0, 90);
 hold on;
 scatter(goal(1), goal(2), 50, 'k', 'filled');
@@ -69,10 +69,10 @@ set(h5, 'color', 'w');
 
 %% Guardando las plots
 
-saveas(h2, ['c',num2str(controlador),'_v.png'])
-saveas(h3, ['c',num2str(controlador),'_w.png']) 
-saveas(h4, ['c',num2str(controlador),'_lr.png'])
-saveas(h5, ['c',num2str(controlador),'_pos.png'])
+saveas(h2, ['c',num2str(controlador),'_1_541_v.png'])
+saveas(h3, ['c',num2str(controlador),'_1_541_w.png']) 
+saveas(h4, ['c',num2str(controlador),'_1_541_lr.png'])
+saveas(h5, ['c',num2str(controlador),'_1_541_v_pos.png'])
 
 
 

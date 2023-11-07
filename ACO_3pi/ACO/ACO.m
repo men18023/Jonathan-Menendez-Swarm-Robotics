@@ -11,7 +11,7 @@
 % Para que funcione hay que descomentarlo y descomentar el profile viewer
 % de abajo (casi al final del código)
 tic  % Para medir el tiempo que se tarda el algoritmo en correr.
-prueba = "1027";  %mes/día
+prueba = "1104";  %mes/día
 %% Graph generation
 % Se elige el tipo de grafo que se va a utilizar
 graph_type = "grid";
@@ -23,11 +23,11 @@ if strcmp(graph_type, "grid")
     cost_diag = 0.5;
     tau_0 = 0.1;  % Valor de tau inicial
     G = graph_grid(grid_size);
-    nodo_dest = "90";
+    nodo_dest = "54";
     nodo_init = "1";
     plot_obstacles = 0;
-    bound_x = 0.65;
-    bound_y = 0.75;
+    bound_x = 0.70;
+    bound_y = 0.70;
     ratio_x = 1/(grid_size/4);
     ratio_y = 1/(grid_size/5);
 elseif strcmp(graph_type, "visibility")
@@ -61,7 +61,7 @@ elseif strcmp(graph_type, "rrt")
 end
 
 %% ACO init
-t_max = 70; 
+t_max = 250; 
 hormigas = 50;
 
 % Rate de evaporación (puede tomar valores entre 0 y 1)
