@@ -1,58 +1,69 @@
-function [phi,x,y,u]  = PID_controller1(obj_tcp,agent,ang_diff,tray,k)
-%PID_CONTROLLER1 Summary of this function goes here
-
+function [phi,trajectory,u]  = PID_controller1(obj_tcp,Agent,offset,traj,k)
+%PID_CONTROLLER1 Summary of this function goes here 
 % Propiedades físicas del robot
-MAX_WHEEL_VELOCITY = 800;
-WHEEL_RADIUS = 0.032;
+MAX_WHEEL_VELOCITY = 800;   % maximum rpm available for each wheel
+WHEEL_RADIUS = 32/2000;     % radius in meters
 MAX_SPEED = WHEEL_RADIUS * MAX_WHEEL_VELOCITY;
-ell=96/2000;
-radio=32/2000;
+DISTANCE_FROM_CENTER = 96/2000; % distance from center to wheels in meters
+%radio=WHEEL_RADIUS/2;
+limiter = 50;     % controlled max rpm 
 
 % Posición
-v0 = MAX_SPEED/12;
-alpha = 0.9;
+v0 = MAX_SPEED/4; % initial speed
+alpha = 0.8;   
 
 % PID Orientación
-kpO = 1;
+kpO = 0.7;
 kiO = 0.001;
 kdO = 0;
 eO_D = 0;
 eO_1 = 0;
 EO = 0;
-%   Detailed explanation goes here
-xi = robotat_get_pose(obj_tcp,agent,'eulxyz');
-x = xi(1); y = xi(2); theta = (xi(6)-ang_diff)*pi/180;
-xg = tray(k,1);
-yg = tray(k,2);
+
+xi = robotat_get_pose(obj_tcp,Agent,'eulxyz');
+x = xi(1); y = xi(2);  %theta = (xi(6)-90)*pi/180;
+theta = deg2rad(xi(6)+offset+20);
+xg = traj(1);
+yg = traj(2);
 e = [xg - x; yg - y];
 thetag = atan2(e(2), e(1));
+trajectory = [xi(1) xi(2)];
 eP = norm(e);
 eO = angdiff(theta,thetag);
+%ee = [eP;eO];
+
+% Lineal velocity control
 kP = v0 * (1-exp(-alpha*eP^2)) / eP;
 v = kP*eP;
+
+% Angular velocity control
 eO_D = eO - eO_1;
 EO = EO + eO;
 w = kpO*eO + kiO*EO + kdO*eO_D;
 eO_1 = eO;
 
+% Combination of controllers
 u = [v; w];
 
-phi_R = (v+w*ell)/radio;
-phi_L = (v-w*ell)/radio;
+% Set wheel velocities in rad/s
+phi_L = (v - w * DISTANCE_FROM_CENTER) / WHEEL_RADIUS;
+phi_R = (v + w * DISTANCE_FROM_CENTER) / WHEEL_RADIUS;
+% Set wheel velocities in rpm
 phi_L = convangvel(phi_L, 'rad/s', 'rpm');
 phi_R = convangvel(phi_R, 'rad/s', 'rpm');
 
-if phi_L > 75
-    phi_L = 75;
+% Limit velocities of each wheel to avoid losing control
+if phi_L > limiter
+    phi_L = limiter;
 end
-if phi_L < -75
-    phi_L = -75;
+if phi_L < -limiter
+    phi_L = -limiter;
 end
-if phi_R > 75
-    phi_R = 75;
+if phi_R > limiter
+    phi_R = limiter;
 end
-if phi_R < -75
-    phi_R = -75;
+if phi_R < -limiter
+    phi_R = -limiter;
 end
 
 phi = [phi_L,phi_R];

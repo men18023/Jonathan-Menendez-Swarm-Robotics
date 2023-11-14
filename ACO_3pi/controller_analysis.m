@@ -3,7 +3,7 @@
 
 load('analysis.mat')
 t = 32*linspace(0, length(v_hist)-1, length(v_hist));
-controlador = 1104;
+controlador = 1107;
 % Velocidad lineal de Robot ------------------------
 h2 = figure(1);
 ID = 1;

@@ -68,11 +68,17 @@ tray_y7 = linspace(pos_origin7(2), goal(2), 100);
 tray7 = [tray_x7',tray_y7'];
 % Ciclo decontrol
 k=1;
-bearing = bearing_deg;
-for adj = 1:length(bearing)
-    if bearing(adj) < 0
-        bearing(adj) =  bearing(adj) + 360;
+% Orientation offset for robots 1-10
+offset = zeros(10,1);
+for b = 1:10
+    bearing = bearing_deg(b) + 90;
+    
+    if (bearing > 180)
+        bearing = bearing - 360;
+    elseif (bearing < -180)
+        bearing = bearing + 360;
     end
+    offset(b) = bearing; 
 end
 %%
 while(k<length(tray7))

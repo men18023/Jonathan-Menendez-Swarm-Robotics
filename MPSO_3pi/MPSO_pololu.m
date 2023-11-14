@@ -185,7 +185,7 @@ while 1
         fitness_local(i) = fitness(actual_position(i,1), actual_position(i,2), BENCHMARK_TYPE);
         fitness_global(i) = fitness(actual_position(i,1), actual_position(i,2), BENCHMARK_TYPE);
     end
-    fitness_global_ = min(fitness_global);
+    fitness_global = min(fitness_global);
     state = true;
     end
 %     if state == true

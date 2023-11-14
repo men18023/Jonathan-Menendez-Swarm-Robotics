@@ -52,13 +52,13 @@ TIME_DELTA = 0.032;
 
 PSO_STEP = 1;
 
-USE_STANDARD_PSO = 0;
+USE_STANDARD_PSO = 1;
 
-INERTIA_TYPE = 3;
+INERTIA_TYPE = 4;
 % PSO Parameters (Default: Constriction = 0.8, Local Weight = 2; Global Weight = 10)
 CONSTRICTION_FACTOR = 0.8;
 COGNITIVE_WEIGTH = 2;
-SOCIAL_WEIGTH = 10;
+SOCIAL_WEIGTH = 15;
 
 % Variables de Proportional Integral Derivative controller (PID)
 % KP = K_PROPORTIONAL; % PID proportional gain
@@ -179,7 +179,7 @@ w_max = 2.0; % PSO inertia maximum
 MAXiter = 10000; % Maximum number of iterations
 iter = 0; % Iteration counter
 
-new_pos_hist = [];
+new_pos_hist = [0 0];
 %% Movimiento controlado
 
 
@@ -187,7 +187,7 @@ new_pos_hist = [];
 
 k=1;
 %%
-while number_iteration < 40
+while number_iteration < 20
     %tStart = tic;
     number_iteration = number_iteration + 1;
     disp(number_iteration);
@@ -283,7 +283,7 @@ while number_iteration < 40
     if mod(number_iteration, PSO_STEP) == 0 || number_iteration == 1
         new_position(:,1) = actual_position(:,1) + new_velocity(:,1) * V_scaler;
         new_position(:,2) = actual_position(:,2) + new_velocity(:,2) * V_scaler;
-        new_pos_hist = [new_pos_hist new_position];
+        %new_pos_hist = [new_pos_hist; new_position];
     end
 
         
@@ -296,7 +296,7 @@ while number_iteration < 40
 %         end
         numb = agent_vel-first_agent+1;
         [phi,trajectory,u] = PID_controller1(robotat,agent_vel,offset(agent_vel),new_position(numb,:),k);
-        eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(agent_vel) ',phi(1),phi(2))']);
+        %eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(agent_vel) ',phi(1),phi(2))']);
         %display(phi)
         %eval(['phi_L{' num2str(numb) '}' '=[phi_L{' num2str(numb) '}; phi(1)']);
         %eval(['phi_R{' num2str(numb) '}' '=[phi_R{' num2str(numb) '}; phi(2)']);

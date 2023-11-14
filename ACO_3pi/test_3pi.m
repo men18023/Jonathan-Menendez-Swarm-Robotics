@@ -8,7 +8,8 @@
 % uncomment the next two lines if you want to use
 % MATLAB's desktop to interact with the controller:
 robotat_disconnect(robotat)
-clearvars -except robotat;
+pause(0.5)
+clear;
 close all;
 clc;
 % Load bearing angles for markers 1-15
@@ -17,7 +18,7 @@ load('webots_test.mat');
 
 % Robotat Paramenters
 Agent = 9;
-robotat = robotat_connect();
+%robotat = robotat_connect();
 if ~exist('robotat', 'var')
     robotat = robotat_connect();
 end
@@ -48,7 +49,7 @@ DISTANCE_FROM_CENTER = 96/2000; % distance from center to wheels in meters
 %radio=WHEEL_RADIUS/2;
 limiter = 100;     % controlled max rpm 
 % Posición
-v0 = MAX_SPEED/2; % initial speed
+v0 = MAX_SPEED/4; % initial speed
 alpha = 0.8;      
 
 % PID Orientación
