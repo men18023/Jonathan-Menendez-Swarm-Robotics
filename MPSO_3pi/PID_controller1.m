@@ -1,4 +1,4 @@
-function [phi,trajectory,u]  = PID_controller1(obj_tcp,Agent,offset,traj,k)
+function [phi,trajectory,u]  = PID_controller1(obj_tcp,Agent,offset,traj)
 %PID_CONTROLLER1 Summary of this function goes here 
 % Propiedades físicas del robot
 MAX_WHEEL_VELOCITY = 800;   % maximum rpm available for each wheel
@@ -22,7 +22,7 @@ EO = 0;
 
 xi = robotat_get_pose(obj_tcp,Agent,'eulxyz');
 x = xi(1); y = xi(2);  %theta = (xi(6)-90)*pi/180;
-theta = deg2rad(xi(6)+offset+20);
+theta = deg2rad(xi(6)+offset);
 xg = traj(1);
 yg = traj(2);
 e = [xg - x; yg - y];

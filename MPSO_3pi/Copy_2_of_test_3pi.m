@@ -45,10 +45,10 @@ PID_CONTROLLER = 1;
 
 %USE_BEARING = 0;
 
-TIME_STEP = 32;
+TIME_STEP = 64;
 
 BENCHMARK_TYPE = 0;
-TIME_DELTA = 0.032;
+TIME_DELTA = 0.02;
 
 PSO_STEP = 1;
 
@@ -174,8 +174,8 @@ rho2 = 0; % PSO social uniformity
 V_scaler = TIME_DELTA; % PSO velocity scaling factor
 
 % Variables de calculo de Parametro PSO de Inercia
-w_min = 1.0; % PSO inertia minimum
-w_max = 2.0; % PSO inertia maximum
+w_min = 0.5; % PSO inertia minimum
+w_max = 1.0; % PSO inertia maximum
 MAXiter = 10000; % Maximum number of iterations
 iter = 0; % Iteration counter
 
@@ -234,8 +234,8 @@ while number_iteration < 40
     %    break;
     %end
     % ---------------------------------- MPSO ALGORITHM -----------------------------------
-    rho1 = rand(1,1);
-    rho2 = rand(1,1);
+    rho1 = rand(1);
+    rho2 = rand(1);
     
     % Calculations of Time-Varying Inertia
     if INERTIA_TYPE == 0
@@ -262,15 +262,15 @@ while number_iteration < 40
     % Using Standard PSO Configuration for Path Planner (Adjusting velocity scaler)
     if USE_STANDARD_PSO == 1
         % Standard Configuration of PSO Scaling Parameters
-        c1 = 0.4;
-        c2 = 0.4;
+        c1 = 2;
+        c2 = 4;
         
         % Standard Configuration of PSO Constriction Parameter
-        phi_T = c1 + c2;
+        phi_T = (c1 + c2)/2;
         epsilon = 2.0 / abs(2 - phi_T - sqrt(phi_T^2 - 4 * phi_T));
         
         % PSO Velocity Scaler Configuration (Adjusted to replicate results without Standard PSO)
-        V_scaler = 0.05;
+        V_scaler = 0.04;
 
         if PID_CONTROLLER == 0
             V_scaler = 5.0;
@@ -295,7 +295,7 @@ while number_iteration < 40
 %             %combinedResult = gcat(num(labindex), 1, 1);
 %         end
         numb = agent_vel-first_agent+1;
-        [phi,trajectory,u] = PID_controller1(robotat,agent_vel,offset(agent_vel),new_position(numb,:),k);
+        [phi,trajectory,u] = PID_controller1(robotat,agent_vel,offset(agent_vel),new_position(numb,:));
         eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(agent_vel) ',phi(1),phi(2))']);
         %display(phi)
         %eval(['phi_L{' num2str(numb) '}' '=[phi_L{' num2str(numb) '}; phi(1)']);
