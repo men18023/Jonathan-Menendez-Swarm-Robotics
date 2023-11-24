@@ -12,7 +12,10 @@ Este algoritmo está basado en el comportamiento natural de una colonia de hormi
 </div>
 
 **Código Principal**
-* *ACO_pololu.m*
+
+* `ACO_pololu.m`
+
+Este código ejecuta la trayectoria encontrada por `ACO.m` y guardada en `3pi_path.mat`
 
 **Descripción de Funciones**
 
