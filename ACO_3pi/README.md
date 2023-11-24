@@ -1,7 +1,11 @@
 **Ant Colony Optimization**
 
-Este algoritmo está basado en el comportamiento natural de una colonia de hormigas, donde se observa como las hormigas tienen la capacidad de encontrar un camino óptimo entre el hormiguero y una fuente de alimento. A partir de este comportamiento, Marco Dorigo desarrolló un algoritmo denominadoAnt System(SA), que luego de basarse en un
-método metaheurístico, en donde se ven a las hormigas como base del algoritmo ACO, que permite la solución de problemas discretos de optimización.
+Este algoritmo está basado en el comportamiento natural de una colonia de hormigas, donde se observa como las hormigas tienen la capacidad de encontrar un camino óptimo entre el hormiguero y una fuente de alimento. A partir de este comportamiento, Marco Dorigo desarrolló un algoritmo denominadoAnt System(SA), que luego de basarse en un método metaheurístico, en donde se ven a las hormigas como base del algoritmo ACO, que permite la solución de problemas discretos de optimización.
+
+
+<div align="center">
+<img src="ACO_3pi/Imagenes/ACO.gif" alt="Funcionamiento final ACO" width="500">
+</div>
 
 **Descripción de Funciones**
 
