@@ -9,7 +9,7 @@ function mocap_data = robotat_get_pose(tcp_obj, agents_ids, rotrep)
         s.pld = round(agents_ids);
         write(tcp_obj, uint8(jsonencode(s)));
 
-        while((tcp_obj.BytesAvailable == 0) && (timeout_count < timeout_in100ms) && tcp_obj.Status == "open")
+        while((tcp_obj.BytesAvailable == 0) && (timeout_count < timeout_in100ms))
             timeout_count = timeout_count + 1;
             pause(0.1);
         end

@@ -243,7 +243,7 @@ while number_iteration < 40
     % Calculations of Time-Varying Inertia
     if INERTIA_TYPE == 0
         % Constant Inertia Parameter (Regular Functionality)
-        w(1:Q_Agents) = 0.8;
+        w(first_agent:last_agent) = 0.8;
     elseif INERTIA_TYPE == 1
         % Linearly Decreasing Inertia Parameter (Poor Functionality)
         w(1:Q_Agents) = w_max - (w_max - w_min) * iter / MAXiter;
@@ -302,11 +302,11 @@ while number_iteration < 40
 %     end
 %     phi2 = PID_controller1(robotat, 2, offset(2), new_position(2, :));
 %     phi3 = PID_controller1(robotat, 3, offset(3), new_position(3, :));
-    phi4 = PID_controller1(robotat, 4, offset(4), new_position(4, :));
+    phi4 = PID_controller1(robotat, 4, offset(4)+30, new_position(4, :));
     phi5 = PID_controller1(robotat, 5, offset(5), new_position(5, :));
     phi6 = PID_controller1(robotat, 6, offset(6), new_position(6, :));
     phi7 = PID_controller1(robotat, 7, offset(7), new_position(7, :));
-    phi8 = PID_controller1(robotat, 8, offset(8), new_position(8, :));
+    phi8 = PID_controller1(robotat, 8, offset(8)+90, new_position(8, :));
     %phi9 = PID_controller1(robotat, 9, offset(9), new_position(9, :));
 %     %phi5 = PID_controller1(robotat, 5, offset(5), new_position(5, :));
 % 

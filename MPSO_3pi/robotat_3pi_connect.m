@@ -20,13 +20,9 @@ function robot = robotat_3pi_connect(agent_id)
     robot.port = 8888;
 
     try
-        tcpsock = tcpclient(robot.ip, robot.port, 'Timeout', 5);
+        tcpsock = tcpclient(robot.ip, robot.port);
         robot.tcpsock = tcpsock;
         
-        % Verify the connection
-        if isempty(robot.tcpsock) || ~isvalid(robot.tcpsock) || ~isopen(robot.tcpsock)
-            error('TCP connection is not valid or open.');
-        end
     catch
         disp('ERROR: Could not connect to the robot.');
     end
