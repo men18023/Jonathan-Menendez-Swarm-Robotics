@@ -9,17 +9,16 @@ DISTANCE_FROM_CENTER = 96/2000; % distance from center to wheels in meters
 limiter = 50;     % controlled max rpm 
 
 % Posición
-v0 = MAX_SPEED/4; % initial speed
-alpha = 0.8;   
+v0 = MAX_SPEED/6; % initial speed
+alpha = 0.9;   
 
 % PID Orientación
-kpO = 0.7;
-kiO = 0.001;
-kdO = 0;
+kpO = 0.8;
+kiO = 0.01;
+kdO = 0.0001;
 eO_D = 0;
 eO_1 = 0;
 EO = 0;
-
 xi = robotat_get_pose(obj_tcp,Agent,'eulxyz');
 x = xi(1); y = xi(2);  %theta = (xi(6)-90)*pi/180;
 theta = deg2rad(xi(6)+offset);

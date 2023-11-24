@@ -23,7 +23,7 @@ if ~exist('robotat', 'var')
     robotat = robotat_connect();
 end
 ang_seq = 'eulxyz';  % sequence for all get_pose 
-first_agent = 2;     % first number of 3pi available
+first_agent = 4;     % first number of 3pi available
 last_agent = 10;      % last number of 3pi available
 Q_Agents = last_agent-first_agent+1;
 for con = first_agent:last_agent-1 %first_agent:last_agent
@@ -273,7 +273,7 @@ while number_iteration < 40
         epsilon = 2.0 / abs(2 - phi_T - sqrt(phi_T^2 - 4 * phi_T));
         epsilon = epsilon;
         % PSO Velocity Scaler Configuration (Adjusted to replicate results without Standard PSO)
-        V_scaler = 0.5;
+        V_scaler = 0.2;
 
         if PID_CONTROLLER == 0
             V_scaler = 5.0; 
@@ -300,22 +300,12 @@ while number_iteration < 40
 %         phi_array(agent_vel, :) = phi;
 %         %robotat_3pi_set_wheel_velocities(
 %     end
-    phi2 = PID_controller1(robotat, 2, offset(2), new_position(2, :));
-    phi3 = PID_controller1(robotat, 3, offset(3), new_position(3, :));
-    phi4 = PID_controller1(robotat, 4, offset(4), new_position(4, :));
-    phi5 = PID_controller1(robotat, 5, offset(5), new_position(5, :));
-    phi6 = PID_controller1(robotat, 6, offset(6), new_position(6, :));
     phi7 = PID_controller1(robotat, 7, offset(7), new_position(7, :));
-    phi8 = PID_controller1(robotat, 8, -offset(8), new_position(8, :));
+    phi8 = PID_controller1(robotat, 8, offset(8), new_position(8, :));
     phi9 = PID_controller1(robotat, 9, offset(9), new_position(9, :));
 %     %phi5 = PID_controller1(robotat, 5, offset(5), new_position(5, :));
 % 
 %     %disp(phi_array)
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(2) ',phi2(1),phi2(2))']);
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(3) ',phi3(1),phi3(2))']);
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(4) ',phi4(1),phi4(2))']);
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(5) ',phi5(1),phi5(2))']);
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(6) ',phi6(1),phi6(2))']);
     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(7) ',phi7(1),phi7(2))']);
     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(8) ',phi8(1),phi8(2))']);
     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(9) ',phi9(1),phi9(2))']);

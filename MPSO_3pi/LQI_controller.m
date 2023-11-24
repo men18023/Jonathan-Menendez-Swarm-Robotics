@@ -1,52 +1,61 @@
-function [phi,x,y,u]  = LQI_controller(obj_tcp,agent,ang_diff,tray,k)
-%PID_CONTROLLER1 Summary of this function goes here
-
+function [phi,trajectory,u]  = LQI_controller1(obj_tcp,Agent,offset,traj)
+%PID_CONTROLLER1 Summary of this function goes here 
 % Propiedades físicas del robot
-MAX_WHEEL_VELOCITY = 800;
-WHEEL_RADIUS = 0.032;
+MAX_WHEEL_VELOCITY = 800;   % maximum rpm available for each wheel
+WHEEL_RADIUS = 32/2000;     % radius in meters
 MAX_SPEED = WHEEL_RADIUS * MAX_WHEEL_VELOCITY;
-ell=96/2000;
-radio=32/2000;
+DISTANCE_FROM_CENTER = 96/2000; % distance from center to wheels in meters
+%radio=WHEEL_RADIUS/2;
+limiter = 50;     % controlled max rpm 
 
-%%LQI
-sigma=0;
-Cr = eye(2);
-B = eye(2);
-R = eye(2);
-A = zeros(2); 
-Dr = zeros(2);
-AA = [A, zeros(size(Cr')); Cr, zeros(size(Cr,1))];
-BB = [B; Dr];
-QQ = eye(size(A,1) + size(Cr,1));
-QQ(3,3) = 2.2; QQ(4,4) = 0.7;
-Klqi = lqr(AA, BB, QQ, R);
+Klqr_x = 0.2127;
+Klqr_y = 0.2127;
 
-xi = robotat_get_pose(obj_tcp,agent,'eulxyz');
-x = xi(1); y = xi(2); theta = (xi(6)-ang_diff)*pi/180;
-pos = [x;y];
-%ee = tray(k,1)-xi(1);
-thetag = atan2(theta(2), theta(1));
-pos = [pos;thetag];
-sigma = sigma + (Cr*pos - tray(k,:))*0.001;
-mu = -Klqi*[pos; sigma];
-u=finv(pos,mu);
 
-phi_R = (u(1) - u(2)*ell) / radio;
-phi_L = (u(1) + u(2)*ell) / radio;
+xi = robotat_get_pose(obj_tcp,Agent,'eulxyz');
+x = xi(1); y = xi(2);  %theta = (xi(6)-90)*pi/180;
+theta = deg2rad(xi(6)+offset);
+xg = traj(1);
+yg = traj(2);
+e = [xg - x; yg - y];
+thetag = atan2(e(2), e(1));
+trajectory = [xi(1) xi(2)];
+eP = norm(e);
+eO = angdiff(theta,thetag);
+%ee = [eP;eO];
+
+% Lineal velocity control
+kP = v0 * (1-exp(-alpha*eP^2)) / eP;
+v = kP*eP;
+
+% Angular velocity control
+eO_D = eO - eO_1;
+EO = EO + eO;
+w = kpO*eO + kiO*EO + kdO*eO_D;
+eO_1 = eO;
+
+% Combination of controllers
+u = [v; w];
+
+% Set wheel velocities in rad/s
+phi_L = (v - w * DISTANCE_FROM_CENTER) / WHEEL_RADIUS;
+phi_R = (v + w * DISTANCE_FROM_CENTER) / WHEEL_RADIUS;
+% Set wheel velocities in rpm
 phi_L = convangvel(phi_L, 'rad/s', 'rpm');
 phi_R = convangvel(phi_R, 'rad/s', 'rpm');
 
-if phi_L > 50
-    phi_L = 50;
+% Limit velocities of each wheel to avoid losing control
+if phi_L > limiter
+    phi_L = limiter;
 end
-if phi_L < -50
-    phi_L = -50;
+if phi_L < -limiter
+    phi_L = -limiter;
 end
-if phi_R > 50
-    phi_R = 50;
+if phi_R > limiter
+    phi_R = limiter;
 end
-if phi_R < -50
-    phi_R = -50;
+if phi_R < -limiter
+    phi_R = -limiter;
 end
 
 phi = [phi_L,phi_R];
