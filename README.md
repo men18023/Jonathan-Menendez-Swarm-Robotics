@@ -46,13 +46,15 @@ La Universidad del Valle de Guatemala ha realizado avances en la robótica de en
   - `Documentación Marco Teórico` contiene todos los doumentos utilizados para la sección de Marco Teórico para el documento final de tesis.
   
 ## Instalación
-
+El desarrollo e implementación de los algoritmos a nivel físivo se trabajo utilizando el software de MATLAB, en su versión R2021a. 
 ACO
 El algoritmo de Ant Colony Optimization se divide en dos partes:
 - Generación de trayectoria con parámetros de ACO. 
 - Ejecución de trayectoria con controlador para robot Pololu 3pi+.
 
 PSO
+- Todo el algoritmo y ejecución de las trayetorias generadas para el global best del sistema son generados dentro del mismo archivo.
+- La función de controlador se encuentra creado en su propio archivo de MATLAB para facilitar la llamada de la función para cada agente robótico
 
 
 ## Uso
