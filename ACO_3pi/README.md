@@ -11,6 +11,9 @@ Este algoritmo está basado en el comportamiento natural de una colonia de hormi
 <img src="Imagenes/ACO.gif" alt="Funcionamiento final ACO" width="400">
 </div>
 
+**Código Principal**
+* *ACO_pololu.m*
+
 **Descripción de Funciones**
 
 * *robotat_connect.m*
