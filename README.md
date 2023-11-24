@@ -48,17 +48,33 @@ La Universidad del Valle de Guatemala ha realizado avances en la robótica de en
 ## Instalación
 El desarrollo e implementación de los algoritmos a nivel físivo se trabajo utilizando el software de MATLAB, en su versión R2021a. 
 ACO
-El algoritmo de Ant Colony Optimization se divide en dos partes:
-- Generación de trayectoria con parámetros de ACO. 
-- Ejecución de trayectoria con controlador para robot Pololu 3pi+.
+- Descargar la carpeta *ACO_3pi* que contiene los archivos *ACO_3pi.m* y las funciones de controladores para los robots y comandos para comunicación con el sistema
+OptiTrack
+- Asegurarse que el servidor del Robotat y el sistema de OptiTrack estén en funcionamiento
+- Elegir el robot Pololu 3pi+ que se desee utilizar.
+- Confirmar que el microcontrolador ESP32 cuente con la configuración para comunicarse con el servidor.
+- Colocar el marcador del sistema OptiTrack en el robot. Verificar que el número entre el robot, ESP32 y marcador coincidan.
+- Abrir en MATLAB la carpeta descargada en el primer paso.
+- Correr el archivo ACO.m, donde se debe elegir los nodos de inicio y final para encontrar la trayectoria por medio del algoritmo.
+- Iniciar el agente en una posición cercana al nodo inicial seleccionado en el paso previo, idealmente.
+- Correr el código del archivo ACO_pololu, donde debe configurar los parámetros que se deseen probar.
 
 PSO
-- Todo el algoritmo y ejecución de las trayetorias generadas para el global best del sistema son generados dentro del mismo archivo.
-- La función de controlador se encuentra creado en su propio archivo de MATLAB para facilitar la llamada de la función para cada agente robótico
+- Descargar la carpeta *MPSO_3pi* que contiene los archivos *MPSO_3pi.m* y las funciones de controladores para los robots y comandos para comunicación con el sistema
+OptiTrack
+- Asegurarse que el servidor del Robotat y el sistema de OptiTrack estén en funciona-
+miento
+- Elegir los robots Pololu 3pi+ que se deseen utilizar. Se debe elegir una secuencia continua entre los robots disponibles del 1 al 10
+- Confirmar que los microcontroladores ESP32 cuente con la configuración para comunicarse con el servidor.
+- Colocar los marcadores del sistema OptiTrack en cada uno de los robots. Verificar que el número entre el robot, ESP32 y marcador coincidan
+- Encender y colocar los agentes en las posiciones iniciales deseadas
+- Abrir en MATLAB la carpeta descargada en el primer paso
+- Correr el código del archivo MPSO_pololu, donde debe ajustar algunas variables para indicar que robots fueron seleccionados y los parámetros del algoritmo que se deseen
+probar
 
 
 ## Uso
-
+El desarrollo e implementación de los algoritmos a nivel físivo se trabajo utilizando el software de MATLAB, en su versión R2021a. 
 
 
 
