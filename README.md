@@ -43,7 +43,7 @@ La Universidad del Valle de Guatemala ha realizado avances en la robótica de en
   - `Documentación Antecedentes` contiene todos los doumentos utilizados para la sección de Antecedentes para el documento final de tesis.
   - `Documentación Marco Teórico` contiene todos los doumentos utilizados para la sección de Marco Teórico para el documento final de tesis.
 
-- `` es la carpeta principal y se divide en:
+- `pololu3pi_base` es la carpeta que contiene el archivo `pololu3pi_base.ino` que debe ser cargado a los ESP32 de cada Pololu 3pi+ para poder realizar las pruebas con comunicación con el servidor y el sistema de captura de movimiento.
 ## Instalación
 El desarrollo e implementación de los algoritmos a nivel físivo se trabajo utilizando el software de MATLAB, en su versión R2021a. 
 ACO
