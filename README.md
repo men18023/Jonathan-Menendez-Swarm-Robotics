@@ -23,7 +23,7 @@ Este algoritmo está basado en el comportamiento natural de una colonia de hormi
 método metaheurístico, en donde se ven a las hormigas como base del algoritmo ACO, que permite la solución de problemas discretos de optimización.
 
 <div align="center">
-<img src="https://github.com/men18023/Jonathan-Menendez-Swarm-Robotics/assets/68084833/be87a6c0-01f1-47dc-935d-0feb88acacbd" alt="Mesa de pruebas Robotat" width="500">
+<img src="ACO_3pi/Imagenes/ACO.gif" alt="Mesa de pruebas Robotat" width="500">
 </div>
 
 ## Índice
