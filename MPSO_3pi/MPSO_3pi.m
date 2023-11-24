@@ -1,5 +1,5 @@
 % MATLAB controller for Webots
-% File:          e-puck_MPSO_m.m
+% File:          MPSO_3pi.m
 % Date:          06/20/2023
 % Description:   e-puck_MPSO migration to matlab
 % Author:        Jonathan Menéndez Cardona 18023
