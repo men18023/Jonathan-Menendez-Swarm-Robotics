@@ -38,12 +38,12 @@ La Universidad del Valle de Guatemala ha realizado avances en la robótica de en
   - `Anexos` contiene archivos antiguos y de prueba utilizados durante el desarrollo de los archivos finales.
   - Archivos para la ejecución de trayectorias con los robots físicos utilizando el algoritmo de MPSO.
   - El archivos `README.md` que explica el funcionamiento de los archivos para ejecución de las pruebas.
-
-
+ 
 - `Documentación` es la carpeta para almacenar documentación relacionada a este trabajo de graduación:
   - `Documentación Antecedentes` contiene todos los doumentos utilizados para la sección de Antecedentes para el documento final de tesis.
   - `Documentación Marco Teórico` contiene todos los doumentos utilizados para la sección de Marco Teórico para el documento final de tesis.
-  
+
+- `` es la carpeta principal y se divide en:
 ## Instalación
 El desarrollo e implementación de los algoritmos a nivel físivo se trabajo utilizando el software de MATLAB, en su versión R2021a. 
 ACO
