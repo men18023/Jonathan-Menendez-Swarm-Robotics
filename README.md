@@ -18,7 +18,6 @@ Este proyecto se centra en la validación de algoritmos de robótica de enjambre
 - [Contenido](#contenido)
 - [Instalación](#instalación)
 - [Uso](#uso)
-- [Resultados](#resultados)
 
 
 ## Introducción
@@ -39,28 +38,51 @@ La Universidad del Valle de Guatemala ha realizado avances en la robótica de en
   - `Anexos` contiene archivos antiguos y de prueba utilizados durante el desarrollo de los archivos finales.
   - Archivos para la ejecución de trayectorias con los robots físicos utilizando el algoritmo de MPSO.
   - El archivos `README.md` que explica el funcionamiento de los archivos para ejecución de las pruebas.
-
-
+ 
 - `Documentación` es la carpeta para almacenar documentación relacionada a este trabajo de graduación:
   - `Documentación Antecedentes` contiene todos los doumentos utilizados para la sección de Antecedentes para el documento final de tesis.
   - `Documentación Marco Teórico` contiene todos los doumentos utilizados para la sección de Marco Teórico para el documento final de tesis.
-  
-## Instalación
 
+- `pololu3pi_base` es la carpeta que contiene el archivo `pololu3pi_base.ino` que debe ser cargado a los ESP32 de cada Pololu 3pi+ para poder realizar las pruebas con comunicación con el servidor y el sistema de captura de movimiento.
+## Instalación
+El desarrollo e implementación de los algoritmos a nivel físivo se trabajo utilizando el software de MATLAB, en su versión R2021a. 
 ACO
-El algoritmo de Ant Colony Optimization se divide en dos partes:
-- Generación de trayectoria con parámetros de ACO. 
-- Ejecución de trayectoria con controlador para robot Pololu 3pi+.
+- Descargar la carpeta *ACO_3pi* que contiene los archivos *ACO_3pi.m* y las funciones de controladores para los robots y comandos para comunicación con el sistema
+OptiTrack
+- Asegurarse que el servidor del Robotat y el sistema de OptiTrack estén en funcionamiento
+- Elegir el robot Pololu 3pi+ que se desee utilizar.
+- Confirmar que el microcontrolador ESP32 cuente con la configuración para comunicarse con el servidor.
+- Colocar el marcador del sistema OptiTrack en el robot. Verificar que el número entre el robot, ESP32 y marcador coincidan.
+- Abrir en MATLAB la carpeta descargada en el primer paso.
+- Correr el archivo ACO.m, donde se debe elegir los nodos de inicio y final para encontrar la trayectoria por medio del algoritmo.
+- Iniciar el agente en una posición cercana al nodo inicial seleccionado en el paso previo, idealmente.
+- Correr el código del archivo ACO_pololu, donde debe configurar los parámetros que se deseen probar.
 
 PSO
+- Descargar la carpeta *MPSO_3pi* que contiene los archivos *MPSO_3pi.m* y las funciones de controladores para los robots y comandos para comunicación con el sistema
+OptiTrack
+- Asegurarse que el servidor del Robotat y el sistema de OptiTrack estén en funciona-
+miento
+- Elegir los robots Pololu 3pi+ que se deseen utilizar. Se debe elegir una secuencia continua entre los robots disponibles del 1 al 10
+- Confirmar que los microcontroladores ESP32 cuente con la configuración para comunicarse con el servidor.
+- Colocar los marcadores del sistema OptiTrack en cada uno de los robots. Verificar que el número entre el robot, ESP32 y marcador coincidan
+- Encender y colocar los agentes en las posiciones iniciales deseadas
+- Abrir en MATLAB la carpeta descargada en el primer paso
+- Correr el código del archivo MPSO_pololu, donde debe ajustar algunas variables para indicar que robots fueron seleccionados y los parámetros del algoritmo que se deseen
+probar
 
 
 ## Uso
+La verificación de los algoritmos nivel de simulación fue realizado en [Webots 2023a](https://cyberbotics.com/#download), el cuál es un simulador de robots 3D gratuito y de código abierto elaborado por Cyberbotics para uso de forma profesional en la industria, la educación y la investigación.
 
-Ambos algoritmos usan una serie de funciones de MATLAB que permiten la comunicación con el sistema de 
+<div align="center">
+<img src="https://github.com/men18023/Jonathan-Menendez-Swarm-Robotics/assets/68084833/18c4fc58-bb0d-4c68-9e0a-707e45dba896" alt="Webots 2023a" width="300">
+</div>
 
-## Resultados
+El desarrollo e implementación de los algoritmos a nivel físivo se trabajo utilizando el software de [MATLAB](https://www.mathworks.com/products.html?s_tid=gn_ps), en su versión R2021a. MATLAB es un entorno de programación de lenguaje avanzado para computación numérica, visualización de datos y programación de algoritmos. Es desarrollado y comercializado por MathWorks. MATLAB es un lenguaje de programación matricial, lo que significa que los datos se almacenan y manipulan en matrices.  
 
-
+<div align="center">
+<img src="https://github.com/men18023/Jonathan-Menendez-Swarm-Robotics/assets/68084833/b3ea0e13-b650-4bba-912e-b29539bdbee8" alt="MATLAB R2021a" width="300">
+</div>
 
 
