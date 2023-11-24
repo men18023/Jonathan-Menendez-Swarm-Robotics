@@ -3,11 +3,12 @@
 Este algoritmo está basado en el comportamiento natural de una colonia de hormigas, donde se observa como las hormigas tienen la capacidad de encontrar un camino óptimo entre el hormiguero y una fuente de alimento. A partir de este comportamiento, Marco Dorigo desarrolló un algoritmo denominadoAnt System(SA), que luego de basarse en un método metaheurístico, en donde se ven a las hormigas como base del algoritmo ACO, que permite la solución de problemas discretos de optimización.
 
 <div align="center">
-<img src="Imagenes/PNGs/c3_traj.png" alt="Trayectoria Generada por ACO.m" width="500">
+<img src="Imagenes/PNGs/c3_traj.png" alt="Trayectoria Generada por ACO.m" width="400">
 </div>
 
+
 <div align="center">
-<img src="Imagenes/ACO.gif" alt="Funcionamiento final ACO" width="500">
+<img src="Imagenes/ACO.gif" alt="Funcionamiento final ACO" width="400">
 </div>
 
 **Descripción de Funciones**
