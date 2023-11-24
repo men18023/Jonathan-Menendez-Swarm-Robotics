@@ -42,24 +42,22 @@ La Universidad del Valle de Guatemala ha realizado avances en la robótica de en
 
 
 - `Documentación` es la carpeta para almacenar documentación relacionada a este trabajo de graduación:
-  - `subcarpeta1` es una subcarpeta que contiene `file1.md` y un archivo `README.md`.
-  - `subcarpeta2` es otra subcarpeta que contiene `file2.md` y un archivo `README.md`.
-
-- El archivo `README.md` en la parte inferior es el README principal de tu repositorio.
-
-
-You can copy and paste this Markdown code block into your `README.md` to display the folder structure, and adjust it to match your actual folder structure as needed.
-
+  - `Documentación Antecedentes` contiene todos los doumentos utilizados para la sección de Antecedentes para el documento final de tesis.
+  - `Documentación Marco Teórico` contiene todos los doumentos utilizados para la sección de Marco Teórico para el documento final de tesis.
+  
 ## Instalación
 
 ACO
+El algoritmo de Ant Colony Optimization se divide en dos partes:
+- Generación de trayectoria con parámetros de ACO. 
+- Ejecución de trayectoria con controlador para robot Pololu 3pi+.
 
 PSO
-[Explica cómo instalar o configurar el proyecto aquí.]
+
 
 ## Uso
 
-[Describe cómo utilizar el proyecto o incluye ejemplos aquí.]
+Ambos algoritmos usan una serie de funciones de MATLAB que permiten la comunicación con el sistema de 
 
 ## Resultados
 
