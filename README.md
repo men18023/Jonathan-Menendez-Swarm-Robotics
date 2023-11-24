@@ -19,6 +19,7 @@ El algoritmo original fue introducido en 1995 por James Kennedy y Russell Eberha
 En PSO, las partículas se colocan en un espacio de búsqueda de un problema o función, y cada entidad evalúa una función objetivo en su ubicación actual. Luego, cada partícula determina su posición en el espacio de búsqueda combinando algún aspecto de su historial de ubicaciones actuales y las mejores ubicaciones con las de uno o más miembros del enjambre, incluyendo algunas perturbaciones aleatorias. La siguiente iteración se produce después de que se hayan movido todas las partículas. En su última instancia, es probable que el enjambre se acerque al valor óptimo de la función ajustada.
 
 #Ant Colony Optimization
+
 Este algoritmo está basado en el comportamiento natural de una colonia de hormigas, donde se observa como las hormigas tienen la capacidad de encontrar un camino óptimo entre el hormiguero y una fuente de alimento. A partir de este comportamiento, Marco Dorigo desarrolló un algoritmo denominadoAnt System(SA), que luego de basarse en un
 método metaheurístico, en donde se ven a las hormigas como base del algoritmo ACO, que permite la solución de problemas discretos de optimización.
 
