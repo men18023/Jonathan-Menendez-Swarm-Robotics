@@ -4,6 +4,10 @@ El algoritmo original fue introducido en 1995 por James Kennedy y Russell Eberha
 
 En PSO, las partículas se colocan en un espacio de búsqueda de un problema o función, y cada entidad evalúa una función objetivo en su ubicación actual. Luego, cada partícula determina su posición en el espacio de búsqueda combinando algún aspecto de su historial de ubicaciones actuales y las mejores ubicaciones con las de uno o más miembros del enjambre, incluyendo algunas perturbaciones aleatorias. La siguiente iteración se produce después de que se hayan movido todas las partículas. En su última instancia, es probable que el enjambre se acerque al valor óptimo de la función ajustada.
 
+<div align="center">
+<img src="Imagenes/PSO.png" alt="Trayectoria Generada por ACO.m" width="500">
+</div>
+
 **Descripción de Funciones**
 
 * *robotat_connect.m*
