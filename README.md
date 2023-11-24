@@ -76,6 +76,6 @@ probar
 El desarrollo e implementación de los algoritmos a nivel físivo se trabajo utilizando el software de MATLAB, en su versión R2021a. 
 
 <div align="center">
-<img src="https://github.com/men18023/Jonathan-Menendez-Swarm-Robotics/assets/68084833/b3ea0e13-b650-4bba-912e-b29539bdbee8" alt="MATLAB R2021a" width="200">
+<img src="https://github.com/men18023/Jonathan-Menendez-Swarm-Robotics/assets/68084833/b3ea0e13-b650-4bba-912e-b29539bdbee8" alt="MATLAB R2021a" width="400">
 </div>
 
