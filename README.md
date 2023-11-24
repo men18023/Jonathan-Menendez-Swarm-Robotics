@@ -73,9 +73,10 @@ probar
 
 
 ## Uso
+La verificación de los algoritmos nivel de simulación fue realizado en [Webots 2023a](https://cyberbotics.com/#download), el cuál es un simulador de robots 3D gratuito y de código abierto elaborado por Cyberbotics para uso de forma profesional en la industria, la educación y la investigación.
 El desarrollo e implementación de los algoritmos a nivel físivo se trabajo utilizando el software de MATLAB, en su versión R2021a. 
-
 <div align="center">
 <img src="https://github.com/men18023/Jonathan-Menendez-Swarm-Robotics/assets/68084833/b3ea0e13-b650-4bba-912e-b29539bdbee8" alt="MATLAB R2021a" width="300">
 </div>
+
 
