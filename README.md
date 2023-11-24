@@ -28,8 +28,10 @@ La Universidad del Valle de Guatemala ha realizado avances en la robótica de en
 ## Contenido
 
 - `ACO_3pi` es la carpeta principal.
-  - `subcarpeta1` es una subcarpeta que contiene `file1.md` y un archivo `README.md`.
-  - `subcarpeta2` es otra subcarpeta que contiene `file2.md` y un archivo `README.md`.
+  - `ACO` es una subcarpeta que contiene los archivos para generación de una trayectoria desde un punto inicial a un punto final por medio del alogoritmo ACO y un archivo `README.md`.
+  - `imágenes` es otra subcarpeta que contiene imágenes de resultados y pruebas realizadas con el algoritmo ACO.}
+  - `workspaces` es una subcarpeta que contiene los "workspace" con las variables utilizadas para cada prueba realizada, cada una relacionada con imágenes de la subcarpeta con el mismo nombre.
+  - `Anexos` contiene archivos antiguos y de prueba utilizados durante el desarrollo de los archivos finales.
   
 - `MPSO_3pi` es la carpeta principal.
   - `subcarpeta1` es una subcarpeta que contiene `file1.md` y un archivo `README.md`.
