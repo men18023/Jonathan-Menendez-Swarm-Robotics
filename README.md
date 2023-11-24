@@ -59,9 +59,6 @@ PSO
 
 ## Uso
 
-Ambos algoritmos usan una serie de funciones de MATLAB que permiten la comunicación con el sistema de 
-
-## Resultados
 
 
 
