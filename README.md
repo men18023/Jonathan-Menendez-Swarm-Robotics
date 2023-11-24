@@ -24,6 +24,7 @@ Este algoritmo está basado en el comportamiento natural de una colonia de hormi
 método metaheurístico, en donde se ven a las hormigas como base del algoritmo ACO, que permite la solución de problemas discretos de optimización.
 
 <div align="center">
+  
 ![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 <br>
 <img src="ACO_3pi/Imagenes/ACO.gif" alt="Mesa de pruebas Robotat" width="40" height="40" />
