@@ -50,14 +50,14 @@ La Universidad del Valle de Guatemala ha realizado avances en la robótica de en
 ACO
 El algoritmo de Ant Colony Optimization se divide en dos partes:
 - Generación de trayectoria con parámetros de ACO. 
-- Ejecución de trayectoria con controlador y robot Pololu 3pi+.
+- Ejecución de trayectoria con controlador para robot Pololu 3pi+.
 
 PSO
-[Explica cómo instalar o configurar el proyecto aquí.]
+
 
 ## Uso
 
-[Describe cómo utilizar el proyecto o incluye ejemplos aquí.]
+Ambos algoritmos usan una serie de funciones de MATLAB que permiten la comunicación con el sistema de 
 
 ## Resultados
 
