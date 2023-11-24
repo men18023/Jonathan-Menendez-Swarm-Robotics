@@ -79,7 +79,7 @@ La verificación de los algoritmos nivel de simulación fue realizado en [Webots
 <img src="https://github.com/men18023/Jonathan-Menendez-Swarm-Robotics/assets/68084833/18c4fc58-bb0d-4c68-9e0a-707e45dba896" alt="Webots 2023a" width="300">
 </div>
 
-El desarrollo e implementación de los algoritmos a nivel físivo se trabajo utilizando el software de [MATLAB](https://www.mathworks.com/products.html?s_tid=gn_ps), en su versión R2021a. 
+El desarrollo e implementación de los algoritmos a nivel físivo se trabajo utilizando el software de [MATLAB](https://www.mathworks.com/products.html?s_tid=gn_ps), en su versión R2021a. MATLAB es un entorno de programación de lenguaje avanzado para computación numérica, visualización de datos y programación de algoritmos. Es desarrollado y comercializado por MathWorks. MATLAB es un lenguaje de programación matricial, lo que significa que los datos se almacenan y manipulan en matrices.  
 
 <div align="center">
 <img src="https://github.com/men18023/Jonathan-Menendez-Swarm-Robotics/assets/68084833/b3ea0e13-b650-4bba-912e-b29539bdbee8" alt="MATLAB R2021a" width="300">
