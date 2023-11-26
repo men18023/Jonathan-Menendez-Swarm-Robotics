@@ -11,6 +11,12 @@ Este algoritmo está basado en el comportamiento natural de una colonia de hormi
 <img src="Imagenes/ACO.gif" alt="Funcionamiento final ACO" width="400">
 </div>
 
+**Código Principal**
+
+* `ACO_pololu.m`
+
+Este código ejecuta la trayectoria encontrada por `ACO.m` y guardada en `3pi_path.mat`. Inicialmente, se adquieren los puntos que conforman la trayectoria generada. Estos puntos son luego sometidos a un proceso de interpolación para lograr una trayectoria más suave y continua. Luego se ejecuta la trayectoria por medio de un controlador PID con un modelo dinámico de tipo úniciclo.
+
 **Descripción de Funciones**
 
 * *robotat_connect.m*
