@@ -11,7 +11,7 @@
 % Para que funcione hay que descomentarlo y descomentar el profile viewer
 % de abajo (casi al final del código)
 tic  % Para medir el tiempo que se tarda el algoritmo en correr.
-prueba = "1107";  %mes/día
+prueba = "1125";  %mes/día
 %% Graph generation
 % Se elige el tipo de grafo que se va a utilizar
 graph_type = "grid";
@@ -23,11 +23,11 @@ if strcmp(graph_type, "grid")
     cost_diag = 0.5;
     tau_0 = 0.1;  % Valor de tau inicial
     G = graph_grid(grid_size);
-    nodo_dest = "55";
-    nodo_init = "10";
+    nodo_dest = "65";
+    nodo_init = "15";
     plot_obstacles = 0;
-    bound_x = 0.70;
-    bound_y = 0.70;
+    bound_x = 0.60;
+    bound_y = 0.60;
     ratio_x = 1/(grid_size/4);
     ratio_y = 1/(grid_size/5);
 elseif strcmp(graph_type, "visibility")
@@ -220,12 +220,12 @@ fprintf(formatSpec, t-1, tiempofinal, moda)
 bpath = [G.Nodes.X(best_path), G.Nodes.Y(best_path)];
 if graph_type == "grid"
     % webots_path = (bpath - grid_sizex/2).*[(bound_per*2/5) (bound_per*-1/2)];
-    webots_path = (bpath - grid_size/2).*[(bound_x*ratio_x) (bound_y*ratio_y)];
+    pololu_path = (bpath - grid_size/2).*[(bound_x*ratio_x) (bound_y*ratio_y)];
 else
     %webots_path = bpath.*[1/grid_sizex -1/grid_sizex];
 end
 wb_pc_path = 'C:\Users\jonam\OneDrive - Universidad del Valle de Guatemala\Escritorio\Tesis_2023\Repository\Jonathan-Menendez-Swarm-Robotics-\ACO_3pi\';
-save(strcat(wb_pc_path, 'webots_test.mat'), 'bpath', 'webots_path', 'graph_type')
+save(strcat(wb_pc_path, 'pololu_best.mat'), 'bpath', 'pololu_path', 'graph_type')
 filename = strcat(prueba,"_",nodo_init,"_",nodo_dest);
 %saveas(fig2, [filename,'_traj.png']);
 hgexport(fig2,strcat(filename,'_pos.eps'));

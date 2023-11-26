@@ -3,7 +3,7 @@
 
 load('analysis.mat')
 t = 32*linspace(0, length(v_hist)-1, length(v_hist));
-controlador = 1107;
+controlador = 1125;
 % Velocidad lineal de Robot ------------------------
 h2 = figure(1);
 ID = 1;
@@ -69,10 +69,10 @@ set(h5, 'color', 'w');
 
 %% Guardando las plots
 
-saveas(h2, ['c',num2str(controlador),'_1_541_v.png'])
-saveas(h3, ['c',num2str(controlador),'_1_541_w.png']) 
-saveas(h4, ['c',num2str(controlador),'_1_541_lr.png'])
-saveas(h5, ['c',num2str(controlador),'_1_541_v_pos.png'])
+saveas(h2, ['c',num2str(controlador),'_15_651_v.png'])
+saveas(h3, ['c',num2str(controlador),'_15_651_w.png']) 
+saveas(h4, ['c',num2str(controlador),'_15_651_lr.png'])
+saveas(h5, ['c',num2str(controlador),'_15_651_v_pos.png'])
 
 
 

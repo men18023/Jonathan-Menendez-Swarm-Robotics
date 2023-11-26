@@ -22,7 +22,6 @@ function robot = robotat_3pi_connect(agent_id)
     try
         tcpsock = tcpclient(robot.ip, robot.port);
         robot.tcpsock = tcpsock;
-        
     catch
         disp('ERROR: Could not connect to the robot.');
     end

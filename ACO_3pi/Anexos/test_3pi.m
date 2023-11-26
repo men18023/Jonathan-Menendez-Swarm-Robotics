@@ -26,6 +26,7 @@ robot_agent = robotat_3pi_connect(Agent);
 
 % Orientation offset for robots 1-10
 offset = zeros(10,1);
+
 for b = 1:10
     bearing = bearing_deg(b) + 90;
     
@@ -141,7 +142,7 @@ while(lim>0.04)     % break loop if position error is < 5cm
     
     xi = robotat_get_pose(robotat,Agent,'eulxyz');
     x = xi(1); y = xi(2);  %theta = (xi(6)-90)*pi/180;
-    theta = deg2rad(xi(6)+offset(Agent));
+    theta = deg2rad(xi(6)+96);
     xg = traj(k,1);
     yg = traj(k,2);
     e = [xg - x; yg - y];

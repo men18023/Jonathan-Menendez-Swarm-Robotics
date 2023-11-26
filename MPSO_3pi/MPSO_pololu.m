@@ -24,9 +24,9 @@ if ~exist('robotat', 'var')
 end
 ang_seq = 'eulxyz';  % sequence for all get_pose 
 first_agent = 2;     % first number of 3pi available
-last_agent = 10;      % last number of 3pi available
+last_agent = 8;      % last number of 3pi available
 Q_Agents = last_agent-first_agent+1;
-for con = first_agent:last_agent-1 %first_agent:last_agent
+for con = first_agent:last_agent %first_agent:last_agent
     pause(0.1)
     eval(['robot_' num2str(con) '=robotat_3pi_connect(con);']);
 end
@@ -48,7 +48,7 @@ PID_CONTROLLER = 1;
 
 TIME_STEP = 64;
 
-BENCHMARK_TYPE = 0;
+BENCHMARK_TYPE = 2;
 TIME_DELTA = 0.02;
 
 PSO_STEP = 1;
@@ -133,7 +133,7 @@ end
 
 offset = zeros(10,1);
 for b = 1:11
-    bearing = bearing_deg(b) + 90;
+    bearing = abs(bearing_deg(b)) + 90;
     
     if (bearing > 180)
         bearing = bearing - 360;
@@ -188,7 +188,7 @@ new_pos_hist = [];
 
 k=1;
 %%
-while number_iteration < 40
+while number_iteration < 60
     %tStart = tic;
     number_iteration = number_iteration + 1;
     disp(number_iteration);
@@ -266,14 +266,14 @@ while number_iteration < 40
     if USE_STANDARD_PSO == 1
         % Standard Configuration of PSO Scaling Parameters
         c1 = 2;
-        c2 = 8;
+        c2 = 5;
         
         % Standard Configuration of PSO Constriction Parameter
         phi_T = c1 + c2;
         epsilon = 2.0 / abs(2 - phi_T - sqrt(phi_T^2 - 4 * phi_T));
         epsilon = epsilon;
         % PSO Velocity Scaler Configuration (Adjusted to replicate results without Standard PSO)
-        V_scaler = 0.5;
+        V_scaler = 0.4;
 
         if PID_CONTROLLER == 0
             V_scaler = 5.0; 
@@ -306,8 +306,8 @@ while number_iteration < 40
     phi5 = PID_controller1(robotat, 5, offset(5), new_position(5, :));
     phi6 = PID_controller1(robotat, 6, offset(6), new_position(6, :));
     phi7 = PID_controller1(robotat, 7, offset(7), new_position(7, :));
-    phi8 = PID_controller1(robotat, 8, -offset(8), new_position(8, :));
-    phi9 = PID_controller1(robotat, 9, offset(9), new_position(9, :));
+    phi8 = PID_controller1(robotat, 8, offset(8), new_position(8, :));
+    %phi9 = PID_controller1(robotat, 9, offset(9), new_position(9, :));
 %     %phi5 = PID_controller1(robotat, 5, offset(5), new_position(5, :));
 % 
 %     %disp(phi_array)
@@ -318,7 +318,7 @@ while number_iteration < 40
     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(6) ',phi6(1),phi6(2))']);
     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(7) ',phi7(1),phi7(2))']);
     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(8) ',phi8(1),phi8(2))']);
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(9) ',phi9(1),phi9(2))']);
+    %eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(9) ',phi9(1),phi9(2))']);
 %     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(7) ',phi_array(7,1),phi_array(7,2))']);
 %     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(8) ',phi_array(8,1),phi_array(8,2))']);
 %     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(9) ',phi_array(9,1),phi_array(9,2))']);
@@ -355,7 +355,7 @@ end
 %%
 %tEnd = toc(tStart);      % pair 2: toc
 pause(1);
-for disc = first_agent:last_agent-1 %first_agent:last_agent
+for disc = first_agent:last_agent %first_agent:last_agent
     %sequence = 'eulxyz';
     eval(['robotat_3pi_force_stop(robot_' num2str(disc) ');']);
     eval(['robotat_3pi_disconnect(robot_' num2str(disc) ');']);

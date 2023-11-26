@@ -26,15 +26,13 @@ function robotat_trvisualize(tcp_obj, agents_ids)
         xframe_handles(i) = plot3([o(1), o(1)+x(1)], [o(2), o(2)+x(2)], ...
             [o(3), o(3)+x(3)], 'LineWidth', 2, 'Color', [0.6350, 0.0780, 0.1840]);
         yframe_handles(i) = plot3([o(1), o(1)+y(1)], [o(2), o(2)+y(2)], ...
-            [o(3), o(3)+y(3)], 'LineWidth', 2, 'Color', [0, 0.445, 0.637]);
+            [o(3), o(3)+y(3)], 'LineWidth', 2, 'Color', [0, 0.4470, 0.7410]);
         zframe_handles(i) = plot3([o(1), o(1)+z(1)], [o(2), o(2)+z(2)], ...
-            [o(3), o(3)+z(3)], 'LineWidth', 2, 'Color',[0.4660, 0.6740, 0.1880]);
+            [o(3), o(3)+z(3)], 'LineWidth', 2, 'Color', [0.4660, 0.6740, 0.1880]);
         name_handles(i) = text(o(1), o(2), o(3), ...
             ['\{', num2str(agents_ids(i)),'\}']);
     end
-    lineLabel1 = 'Eje x'; % Your desired label
-    lineLabel2 = 'Eje y'; % Your desired label
-    lineLabel3 = 'Eje z'; % Your desired label
+    
     grid on;
     axis equal;
     xlim([-3, 3]);
@@ -44,7 +42,7 @@ function robotat_trvisualize(tcp_obj, agents_ids)
     ylabel('$y$', 'Interpreter', 'latex', 'FontSize', 18);
     zlabel('$z$', 'Interpreter', 'latex', 'FontSize', 18);
     hold off;
-    legend(lineLabel1,lineLabel2,lineLabel3);
+
     while(true)
         try
             mocap_data = robotat_get_pose(tcp_obj, agents_ids, 'eulzyx');

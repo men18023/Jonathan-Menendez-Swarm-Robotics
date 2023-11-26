@@ -23,7 +23,7 @@ if ~exist('robotat', 'var')
     robotat = robotat_connect();
 end
 ang_seq = 'eulxyz';  % sequence for all get_pose 
-first_agent = 4;     % first number of 3pi available
+first_agent = 2;     % first number of 3pi available
 last_agent = 9;      % last number of 3pi available
 Q_Agents = last_agent-first_agent+1;
 for con = first_agent:last_agent-1 %first_agent:last_agent
@@ -133,7 +133,7 @@ end
 
 offset = zeros(10,1);
 for b = 1:11
-    bearing = bearing_deg(b) + 90;
+    bearing = abs(bearing_deg(b)) + 90;
     
     if (bearing > 180)
         bearing = bearing - 360;
@@ -188,7 +188,7 @@ new_pos_hist = [];
 
 k=1;
 %%
-while number_iteration < 40
+while number_iteration < 60
     %tStart = tic;
     number_iteration = number_iteration + 1;
     disp(number_iteration);
@@ -243,7 +243,7 @@ while number_iteration < 40
     % Calculations of Time-Varying Inertia
     if INERTIA_TYPE == 0
         % Constant Inertia Parameter (Regular Functionality)
-        w(first_agent:last_agent) = 0.8;
+        w(1:Q_Agents) = 0.8;
     elseif INERTIA_TYPE == 1
         % Linearly Decreasing Inertia Parameter (Poor Functionality)
         w(1:Q_Agents) = w_max - (w_max - w_min) * iter / MAXiter;
@@ -266,14 +266,14 @@ while number_iteration < 40
     if USE_STANDARD_PSO == 1
         % Standard Configuration of PSO Scaling Parameters
         c1 = 2;
-        c2 = 8;
+        c2 = 5;
         
         % Standard Configuration of PSO Constriction Parameter
         phi_T = c1 + c2;
         epsilon = 2.0 / abs(2 - phi_T - sqrt(phi_T^2 - 4 * phi_T));
         epsilon = epsilon;
         % PSO Velocity Scaler Configuration (Adjusted to replicate results without Standard PSO)
-        V_scaler = 2;
+        V_scaler = 0.4;
 
         if PID_CONTROLLER == 0
             V_scaler = 5.0; 
@@ -300,19 +300,19 @@ while number_iteration < 40
 %         phi_array(agent_vel, :) = phi;
 %         %robotat_3pi_set_wheel_velocities(
 %     end
-%     phi2 = PID_controller1(robotat, 2, offset(2), new_position(2, :));
-%     phi3 = PID_controller1(robotat, 3, offset(3), new_position(3, :));
-    phi4 = PID_controller1(robotat, 4, offset(4)+30, new_position(4, :));
+    phi2 = PID_controller1(robotat, 2, offset(2), new_position(2, :));
+    phi3 = PID_controller1(robotat, 3, offset(3), new_position(3, :));
+    phi4 = PID_controller1(robotat, 4, offset(4), new_position(4, :));
     phi5 = PID_controller1(robotat, 5, offset(5), new_position(5, :));
     phi6 = PID_controller1(robotat, 6, offset(6), new_position(6, :));
     phi7 = PID_controller1(robotat, 7, offset(7), new_position(7, :));
-    phi8 = PID_controller1(robotat, 8, offset(8)+90, new_position(8, :));
+    phi8 = PID_controller1(robotat, 8, offset(8), new_position(8, :));
     %phi9 = PID_controller1(robotat, 9, offset(9), new_position(9, :));
 %     %phi5 = PID_controller1(robotat, 5, offset(5), new_position(5, :));
 % 
 %     %disp(phi_array)
-%     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(2) ',phi2(1),phi2(2))']);
-%     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(3) ',phi3(1),phi3(2))']);
+    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(2) ',phi2(1),phi2(2))']);
+    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(3) ',phi3(1),phi3(2))']);
     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(4) ',phi4(1),phi4(2))']);
     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(5) ',phi5(1),phi5(2))']);
     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(6) ',phi6(1),phi6(2))']);

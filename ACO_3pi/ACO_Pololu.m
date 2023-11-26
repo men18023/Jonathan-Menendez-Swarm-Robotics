@@ -7,27 +7,31 @@
 
 % uncomment the next two lines if you want to use
 % MATLAB's desktop to interact with the controller:
-robotat_disconnect(robotat)
-pause(0.5)
-clear;
+
+robotat_disconnect(robotat);
+%%
+clear
 close all;
 clc;
 % Load bearing angles for markers 1-15
 load('Orientaciones.mat','bearing_deg','bearing_new');
-load('webots_test.mat');
-
+load('pololu_best.mat');
+%if ~exist('robotat', 'var')
+robotat = robotat_connect();
+%end
+pause(0.5)
 % Robotat Paramenters
-Agent = 9;
+Agent = 8;
 %robotat = robotat_connect();
-if ~exist('robotat', 'var')
-    robotat = robotat_connect();
-end
 robot_agent = robotat_3pi_connect(Agent);
-
+pause(2)
 % Orientation offset for robots 1-10
+
+%%
 offset = zeros(10,1);
 for b = 1:10
-    bearing = bearing_deg(b) + 90;
+
+    bearing = abs(bearing_deg(b)) + 90;
     
     if (bearing > 180)
         bearing = bearing - 360;
@@ -35,10 +39,16 @@ for b = 1:10
         bearing = bearing + 360;
     end
     offset(b) = bearing; 
+    
+    %disp(offset)
 end
 
+%
+robotat_3pi_set_wheel_velocities(robot_agent,-20,20);
 % Pause while robotat connects (prevents errors on initial get_pose)
 pause(2)
+robotat_3pi_force_stop(robot_agent);
+pause(0.2)
 %iteration = 0;
 %% Movimiento controlado
 % Physical properties of robot (Pololu 3Pi+)
@@ -47,14 +57,14 @@ WHEEL_RADIUS = 32/2000;     % radius in meters
 MAX_SPEED = WHEEL_RADIUS * MAX_WHEEL_VELOCITY;
 DISTANCE_FROM_CENTER = 96/2000; % distance from center to wheels in meters
 %radio=WHEEL_RADIUS/2;
-limiter = 100;     % controlled max rpm 
+limiter = 70;     % controlled max rpm 
 % Posición
 v0 = MAX_SPEED/4; % initial speed
 alpha = 0.8;      
 
 % PID Orientación
 kpO = 1;
-kiO = 0.005;
+kiO = 0.001;
 kdO = 0;
 eO_D = 0;
 eO_1 = 0;
@@ -66,10 +76,10 @@ pos_origin = robotat_get_pose(robotat,Agent,'eulxyz');
 
 %interpolate_step = 0.005; % used on v1 trajectory generation
 % v2 of trajectory generation
-x_traj = [pos_origin(1); webots_path(:, 1)]; 
-y_traj = [pos_origin(2); webots_path(:, 2)];
+x_traj = [pos_origin(1); pololu_path(:, 1)]; 
+y_traj = [pos_origin(2); pololu_path(:, 2)];
 % Desired number of points (including origin points)
-desired_points = 100 + 25 * (length(x_traj) - 2);
+desired_points = 75 + 25 * (length(x_traj) - 2);
 
 % Initialize arrays to store interpolated points
 x_interpolated = [];
@@ -121,14 +131,17 @@ v_hist = zeros(1, length(traj));
 w_hist = zeros(1, length(traj)); 
 rwheel_hist = zeros(1, length(traj)); 
 lwheel_hist = zeros(1, length(traj)); 
+phi_hist = zeros(2,length(traj));
 
 % Ciclo decontrol
 k=1;
 rep = 0;
 %block = 0;
+pause(0.5)
 %%
 %while(k<length(tray))
-while(lim>0.04)     % break loop if position error is < 5cm 
+pause(1)
+while 1%(lim>0.04)     % break loop if position error is < 5cm 
     % break loop in case trajectory doesn't reach expected goal
     if k > length(traj) && rep <= 25
         k = length(traj);
@@ -184,8 +197,7 @@ while(lim>0.04)     % break loop if position error is < 5cm
     if phi_R < -limiter
         phi_R = -limiter;
     end
-    % Send velocities for robot execution
-    robotat_3pi_set_wheel_velocities(robot_agent,phi_L,phi_R);
+
     % Save each iteration of the controller values on a history variable
     e_hist(:,k) = ee;
     trajectory(k,:) = [xi(1) xi(2)];
@@ -196,16 +208,22 @@ while(lim>0.04)     % break loop if position error is < 5cm
     goal = [x_traj(end), y_traj(end)];
     save('analysis.mat', 'trajectory', 'v_hist', 'w_hist', 'rwheel_hist', 'lwheel_hist', 'goal','-append')
     % Go to next desired point
-    k=k+1;
     fprintf('%i\n', k);
+    k=k+1;
+    pause(0.01)
+        % Send velocities for robot execution
+%     if mod(k, 2) == 0
+    robotat_3pi_set_wheel_velocities(robot_agent,phi_L,phi_R);
+%     end
 end
 % Save last position for history variable and stop robot movement
 pause(1);
-if lim<0.04 ||  rep == 25
+if rep == 25 %% lim<0.04 ||
     xi = robotat_get_pose(robotat,Agent,'eulxyz');
     x = xi(1); y = xi(2);
     trajectory(k,:) = [xi(1), xi(2)];
     robotat_3pi_force_stop(robot_agent);
+    pause(1)
     robotat_3pi_disconnect(robot_agent);
 end
 %robotat_disconnect(robotat);
