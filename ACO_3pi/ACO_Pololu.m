@@ -30,7 +30,6 @@ pause(2)
 %%
 offset = zeros(10,1);
 for b = 1:10
-
     bearing = abs(bearing_deg(b)) + 90;
     
     if (bearing > 180)
@@ -39,8 +38,6 @@ for b = 1:10
         bearing = bearing + 360;
     end
     offset(b) = bearing; 
-    
-    %disp(offset)
 end
 
 %

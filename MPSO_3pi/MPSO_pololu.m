@@ -49,7 +49,7 @@ PID_CONTROLLER = 1;
 TIME_STEP = 64;
 
 BENCHMARK_TYPE = 2;
-TIME_DELTA = 0.02;
+TIME_DELTA = 0.2;
 
 PSO_STEP = 1;
 
@@ -265,15 +265,15 @@ while number_iteration < 60
     % Using Standard PSO Configuration for Path Planner (Adjusting velocity scaler)
     if USE_STANDARD_PSO == 1
         % Standard Configuration of PSO Scaling Parameters
-        c1 = 2;
-        c2 = 5;
+        c1 = 1;
+        c2 = 6;
         
         % Standard Configuration of PSO Constriction Parameter
         phi_T = c1 + c2;
         epsilon = 2.0 / abs(2 - phi_T - sqrt(phi_T^2 - 4 * phi_T));
         epsilon = epsilon;
         % PSO Velocity Scaler Configuration (Adjusted to replicate results without Standard PSO)
-        V_scaler = 0.4;
+        V_scaler = 0.5;
 
         if PID_CONTROLLER == 0
             V_scaler = 5.0; 

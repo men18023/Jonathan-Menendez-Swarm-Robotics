@@ -9,7 +9,7 @@ DISTANCE_FROM_CENTER = 96/2000; % distance from center to wheels in meters
 limiter = 50;     % controlled max rpm 
 
 % Posición
-v0 = MAX_SPEED/6; % initial speed
+v0 = MAX_SPEED/4; % initial speed
 alpha = 0.9;   
 
 % PID Orientación
