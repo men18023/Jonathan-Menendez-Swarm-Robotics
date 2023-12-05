@@ -8,7 +8,9 @@
 % uncomment the next two lines if you want to use
 % MATLAB's desktop to interact with the controller:
 
-robotat_disconnect(robotat);
+if exist('robotat', 'var')
+    robotat_disconnect(robotat);
+end
 %%
 clear
 close all;
@@ -21,7 +23,7 @@ robotat = robotat_connect();
 %end
 pause(0.5)
 % Robotat Paramenters
-Agent = 8;
+Agent = 7;
 %robotat = robotat_connect();
 robot_agent = robotat_3pi_connect(Agent);
 pause(2)
@@ -57,10 +59,10 @@ DISTANCE_FROM_CENTER = 96/2000; % distance from center to wheels in meters
 limiter = 70;     % controlled max rpm 
 % Posición
 v0 = MAX_SPEED/4; % initial speed
-alpha = 0.8;      
+alpha = 0.9;      
 
 % PID Orientación
-kpO = 1;
+kpO = 1.2;
 kiO = 0.001;
 kdO = 0;
 eO_D = 0;

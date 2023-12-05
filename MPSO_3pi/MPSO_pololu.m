@@ -13,7 +13,6 @@ pause(0.5)
 clear;
 close all;
 clc;
-
 % Loads bearing angles 
 load('Orientaciones.mat','bearing_deg','bearing_new');
 
@@ -24,7 +23,7 @@ if ~exist('robotat', 'var')
 end
 ang_seq = 'eulxyz';  % sequence for all get_pose 
 first_agent = 2;     % first number of 3pi available
-last_agent = 8;      % last number of 3pi available
+last_agent = 7;      % last number of 3pi available
 Q_Agents = last_agent-first_agent+1;
 for con = first_agent:last_agent %first_agent:last_agent
     pause(0.1)
@@ -48,7 +47,7 @@ PID_CONTROLLER = 1;
 
 TIME_STEP = 64;
 
-BENCHMARK_TYPE = 2;
+BENCHMARK_TYPE = 0;
 TIME_DELTA = 0.2;
 
 PSO_STEP = 1;
@@ -102,11 +101,17 @@ orientation_angle = zeros(Q_Agents,1);
 u_1 = zeros(Q_Agents,1);
 u_2 = zeros(Q_Agents,1);
 
-v_hist = [];
-w_hist = [];
-phi_l_hist = [];
-phi_r_hist = [];
 number_iteration = 0;
+MAX_ITER = 100; % max iteration available for trajectory execution.
+
+%e_hist = zeros(2, length(traj)); 
+trajectory_hist = zeros(MAX_ITER,2*length(1:last_agent)); 
+v_hist = zeros(MAX_ITER, length(1:last_agent)); 
+w_hist = zeros(MAX_ITER, length(1:last_agent)); 
+rwheel_hist = zeros(MAX_ITER, length(1:last_agent)); 
+lwheel_hist = zeros(MAX_ITER, length(1:last_agent)); 
+%phi_hist = zeros(2,length(traj));
+
 index1 = 0;
 state = false;
 pause(2)
@@ -114,22 +119,22 @@ pause(2)
 iteration = 0;
 
 % Initialize all history and algoritm variables.
-trajectory = cell(1, Q_Agents);
-u_vw = cell(1, Q_Agents);
-phi_L = cell(1, Q_Agents);
-phi_R = cell(1, Q_Agents);
+% trajectory = cell(1, Q_Agents);
+% u_vw = cell(1, Q_Agents);
+% phi_L = cell(1, Q_Agents);
+% phi_R = cell(1, Q_Agents);
 % Generate and store the arrays in the cell array
-for i = 1:Q_Agents
-    % Create a 2x1 vector filled with initial values
-    vector = robotat_get_pose(robotat,i,ang_seq);
-    vector0 = zeros(1,2);
-    value = 0;
-    % Store the vector in the cell array
-    trajectory{i} = vector;
-    u_vw{i} = vector;
-    phi_L{i} = value;
-    phi_L{i} = value;
-end
+% for i = 1:Q_Agents
+%     % Create a 2x1 vector filled with initial values
+%     vector = robotat_get_pose(robotat,i,ang_seq);
+%     vector0 = zeros(1,2);
+%     value = 0;
+%     % Store the vector in the cell array
+%     trajectory{i} = vector;
+%     u_vw{i} = vector;
+%     phi_L{i} = value;
+%     phi_L{i} = value;
+% end
 
 offset = zeros(10,1);
 for b = 1:11
@@ -142,6 +147,8 @@ for b = 1:11
     end
     offset(b) = bearing; 
 end
+filename = strcat("analysis_",num2str(BENCHMARK_TYPE),"_",num2str(INERTIA_TYPE));
+filename = strcat(filename,'.mat');
 
 %% Robot variables for algoritm
 position_robot = zeros(Q_Agents,6);
@@ -188,7 +195,7 @@ new_pos_hist = [];
 
 k=1;
 %%
-while number_iteration < 60
+while number_iteration < MAX_ITER
     %tStart = tic;
     number_iteration = number_iteration + 1;
     disp(number_iteration);
@@ -266,7 +273,7 @@ while number_iteration < 60
     if USE_STANDARD_PSO == 1
         % Standard Configuration of PSO Scaling Parameters
         c1 = 1;
-        c2 = 6;
+        c2 = 7;
         
         % Standard Configuration of PSO Constriction Parameter
         phi_T = c1 + c2;
@@ -283,41 +290,59 @@ while number_iteration < 60
     old_velocity = new_velocity;
     new_velocity(:,1) = epsilon .* (w(:) .* old_velocity(:,1) + c1 * rho1 .* (best_local(:,1) - actual_position(:,1)) + c2 * rho2 .* (best_global(1) - actual_position(:,1)));
     new_velocity(:,2) = epsilon .* (w(:) .* old_velocity(:,2) + c1 * rho1 .* (best_local(:,2) - actual_position(:,2)) + c2 * rho2 .* (best_global(2) - actual_position(:,2)));
-    if mod(number_iteration, PSO_STEP) == 0 || number_iteration == 1
-        new_position(first_agent:last_agent,1) = actual_position(:,1) + new_velocity(:,1) * V_scaler;
-        new_position(first_agent:last_agent,2) = actual_position(:,2) + new_velocity(:,2) * V_scaler;
-        new_pos_hist = [new_pos_hist [new_position(:,1);new_position(:,2)]];
-    end
-    
-%     parfor agent_vel = first_agent:last_agent-1
-%         %pause(0.1)
-%         numb = agent_vel - first_agent + 1;
-%         try
-%         [phi, ~, ~] = PID_controller1(robotat, agent_vel, offset(agent_vel), new_position(agent_vel, :));
-%         catch
-%         end
-%         %Do something with phi, e.g., save it to an array
-%         phi_array(agent_vel, :) = phi;
-%         %robotat_3pi_set_wheel_velocities(
+%     if mod(number_iteration, PSO_STEP) == 0 || number_iteration == 1
+    new_position(first_agent:last_agent,1) = actual_position(:,1) + new_velocity(:,1) * V_scaler;
+    new_position(first_agent:last_agent,2) = actual_position(:,2) + new_velocity(:,2) * V_scaler;
+    new_pos_hist = [new_pos_hist [new_position(:,1);new_position(:,2)]];
 %     end
-    phi2 = PID_controller1(robotat, 2, offset(2), new_position(2, :));
-    phi3 = PID_controller1(robotat, 3, offset(3), new_position(3, :));
-    phi4 = PID_controller1(robotat, 4, offset(4), new_position(4, :));
-    phi5 = PID_controller1(robotat, 5, offset(5), new_position(5, :));
-    phi6 = PID_controller1(robotat, 6, offset(6), new_position(6, :));
-    phi7 = PID_controller1(robotat, 7, offset(7), new_position(7, :));
-    phi8 = PID_controller1(robotat, 8, offset(8), new_position(8, :));
+    
+    xi(first_agent:last_agent,:) = robotat_get_pose(robotat,first_agent:last_agent,'eulxyz');
+    parfor agent_vel = first_agent:last_agent
+        %pause(0.1)
+        numb = agent_vel - first_agent + 1;
+        try
+        [phi_L,phi_R, trajectory_x, trajectory_y, uv, uw] = PID_controller1(xi(agent_vel,:), offset(agent_vel), new_position(agent_vel, :));
+        catch
+        end
+        %Do something with phi, e.g., save it to an array
+         phiL_array(:,agent_vel) = phi_L;
+         phiR_array(:,agent_vel) = phi_R;
+         %trajectory_hist(:,agent_vel) = trajectory_x(:,1);
+         traj_x(:,agent_vel) = trajectory_x;
+         traj_y(:,agent_vel) = trajectory_y;
+         v_array(:,agent_vel) = uv;
+         w_array(:,agent_vel) = uw;
+        %robotat_3pi_set_wheel_velocities(
+    end
+%     phi2 = PID_controller1(robotat, 2, offset(2), new_position(2, :));
+%     phi3 = PID_controller1(robotat, 3, offset(3), new_position(3, :));
+%     phi4 = PID_controller1(robotat, 4, offset(4), new_position(4, :));
+%     phi5 = PID_controller1(robotat, 5, offset(5), new_position(5, :));
+%     phi6 = PID_controller1(robotat, 6, offset(6), new_position(6, :));
+%     phi7 = PID_controller1(robotat, 7, offset(7), new_position(7, :));
+%     phi8 = PID_controller1(robotat, 8, offset(8), new_position(8, :));
     %phi9 = PID_controller1(robotat, 9, offset(9), new_position(9, :));
 %     %phi5 = PID_controller1(robotat, 5, offset(5), new_position(5, :));
 % 
 %     %disp(phi_array)
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(2) ',phi2(1),phi2(2))']);
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(3) ',phi3(1),phi3(2))']);
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(4) ',phi4(1),phi4(2))']);
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(5) ',phi5(1),phi5(2))']);
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(6) ',phi6(1),phi6(2))']);
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(7) ',phi7(1),phi7(2))']);
-    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(8) ',phi8(1),phi8(2))']);
+    %trajectory(number_iteration,);
+    trajectory_hist(number_iteration,:) = [traj_x traj_y];
+    v_hist(number_iteration,:) = v_array;
+    w_hist(number_iteration,:) = w_array;
+    rwheel_hist(number_iteration,:) =  phiL_array;
+    lwheel_hist(number_iteration,:) =  phiR_array;
+    for i = first_agent:last_agent
+    eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(i) ',phiL_array(' num2str(i) '),phiR_array(' num2str(i) '))']);
+    end
+% 
+%     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(2) ',phiL_array(2),phiR_array(2))']);
+%     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(3) ',phiL_array(3),phiR_array(3))']);
+%     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(4) ',phiL_array(4),phiR_array(4))']);
+%     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(5) ',phiL_array(5),phiR_array(5))']);
+%     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(6) ',phiL_array(6),phiR_array(6))']);
+%     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(7) ',phiL_array(7),phiR_array(7))']);
+%     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(8) ',phiL_array(8),phiR_array(8))']);
+
     %eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(9) ',phi9(1),phi9(2))']);
 %     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(7) ',phi_array(7,1),phi_array(7,2))']);
 %     eval(['robotat_3pi_set_wheel_velocities(robot_' num2str(8) ',phi_array(8,1),phi_array(8,2))']);
@@ -347,8 +372,8 @@ while number_iteration < 60
 %     rwheel_hist = [rwheel_hist; phi_R];
 %     lwheel_hist = [lwheel_hist; phi_L];
 %     goal = [x_tray7(end), y_tray7(end)];
-%     save('analysis.mat', 'trajectory', 'v_hist', 'w_hist', 'rwheel_hist', 'lwheel_hist', 'goal','-append')
     k=k+1;
+    save(filename, 'first_agent', 'last_agent', 'Q_Agents', 'trajectory_hist', 'v_hist', 'w_hist', 'rwheel_hist', 'lwheel_hist', 'best_global','-append')
 
 end
   

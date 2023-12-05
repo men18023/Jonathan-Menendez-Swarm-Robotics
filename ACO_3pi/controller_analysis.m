@@ -3,7 +3,7 @@
 
 load('analysis.mat')
 t = 32*linspace(0, length(v_hist)-1, length(v_hist));
-controlador = 1125;
+controlador = 1205;
 % Velocidad lineal de Robot ------------------------
 h2 = figure(1);
 ID = 1;
@@ -13,7 +13,7 @@ set(h2,'color','w');
 plot(t, v_hist, 'LineWidth', 2, 'Color', [.1 .4 .7]);
 xlim([0, t(end)]);
 grid on; grid minor;
-xlabel('Tiempo (ms)', 'FontSize', 16); ylabel('Velocidad (m/s)', 'FontSize', 16);
+xlabel('Tiempo (ms)', 'FontSize', 16); ylabel('Velocidad (rad/s)', 'FontSize', 16);
 lgd = legend('Velocidad lineal de robot', 'Location', 'best');
 lgd.FontSize = 14;
 
@@ -45,7 +45,7 @@ hold on;
 plot([0 t(end)],[-6.28 -6.28],'LineStyle','--','Color','k');
 xlim([0,t(end)]);
 grid on; grid minor;
-xlabel('Time (ms)','FontSize',16); ylabel('Velocity (rad/s)','FontSize',16);
+xlabel('Time (ms)','FontSize',16); ylabel('Velocity (rpm)','FontSize',16);
 lgd = legend('Velocidad motor derecho','Velocidad motor izquierdo','Location','best');
 lgd.FontSize = 14;
 box(ax,'on');
@@ -69,10 +69,10 @@ set(h5, 'color', 'w');
 
 %% Guardando las plots
 
-saveas(h2, ['c',num2str(controlador),'_15_651_v.png'])
-saveas(h3, ['c',num2str(controlador),'_15_651_w.png']) 
-saveas(h4, ['c',num2str(controlador),'_15_651_lr.png'])
-saveas(h5, ['c',num2str(controlador),'_15_651_v_pos.png'])
+saveas(h2, ['c',num2str(controlador),'_10_721_v.png'])
+saveas(h3, ['c',num2str(controlador),'_10_721_w.png']) 
+saveas(h4, ['c',num2str(controlador),'_10_721_lr.png'])
+saveas(h5, ['c',num2str(controlador),'_10_721_pos.png'])
 
 
 
